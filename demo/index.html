@@ -14,8 +14,9 @@
     h1 { margin: 0 0 6px; color: #ff5f78; font-size: 15px; }
     #stats { color: #9fb3d9; font-size: 11px; line-height: 1.5; }
     select, input, button { font: inherit; }
-    #city, #search { width: 100%; margin-top: 8px; padding: 8px 9px; border-radius: 6px; border: 1px solid #31517f; background: #0b1020; color: #dce7ff; }
-    #toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+    .field-label { display: block; margin-top: 10px; color: #b9d7ff; font-size: 12px; font-weight: 800; letter-spacing: .2px; }
+    #city { width: 100%; margin-top: 5px; padding: 11px 10px; border-radius: 8px; border: 2px solid #4f8fd8; background: #122849; color: #fff; font-weight: 800; font-size: 15px; box-shadow: 0 0 0 2px #4f8fd822; }
+    #search { width: 100%; margin-top: 8px; padding: 8px 9px; border-radius: 6px; border: 1px solid #31517f; background: #0b1020; color: #dce7ff; }
     .toggle, .btn { border: 1px solid #31517f; border-radius: 6px; color: #dce7ff; background: #172744; padding: 7px 10px; cursor: pointer; }
     .toggle.active, .btn.active { background: #4f8fd8; color: #fff; box-shadow: inset 0 0 0 1px #dbeafe66; }
     #uuid-list { overflow: auto; flex: 1; }
@@ -24,6 +25,8 @@
     .uuid.active { background: #e94560; color: #fff; }
     .uuid .id { font-family: Consolas, monospace; }
     .badge { display: inline-block; margin: 4px 3px 0 0; padding: 2px 5px; border-radius: 4px; font-size: 10px; background: #243b63; color: #b9d7ff; }
+    .badge.stay { background: #235b91; color: #d7ecff; }
+    .badge.stop { background: #806817; color: #fff4b8; }
     .badge.cross { background: #e94560; color: #fff; }
     .badge.hs { background: #f1c40f; color: #111; }
     #main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
@@ -33,6 +36,8 @@
     table { width: 100%; border-collapse: collapse; font-size: 11px; }
     th, td { padding: 4px 6px; border: 1px solid #25436f; text-align: left; vertical-align: top; }
     th { background: #203a66; color: #b9d7ff; position: sticky; top: 0; z-index: 1; }
+    .click-row { cursor: pointer; }
+    .click-row:hover { background: #203a66; }
     .role-DAY_START { color: #5ee27d; font-weight: 700; }
     .role-STAY { color: #64a9ff; }
     .role-STOP { color: #f2d04f; }
@@ -40,7 +45,7 @@
     .speed-high { color: #ff6b4a; font-weight: 700; }
     .speed-ok { color: #5ee27d; }
     #toolbar { position: absolute; top: 10px; right: 12px; z-index: 900; display: flex; gap: 10px; align-items: center; }
-    #toolbar .btn { min-width: 116px; font-weight: 700; box-shadow: 0 3px 10px #0009; }
+    #toolbar .btn { min-width: 128px; font-weight: 700; box-shadow: 0 3px 10px #0009; padding: 9px 13px; }
     #anim { position: absolute; top: 10px; left: 52px; z-index: 900; display: flex; gap: 6px; align-items: center; padding: 7px; border: 1px solid #31517f; border-radius: 8px; background: #101b34ee; box-shadow: 0 3px 10px #0009; }
     #anim button, #anim select { border: 1px solid #31517f; border-radius: 5px; background: #172744; color: #dce7ff; padding: 4px 8px; cursor: pointer; }
     #clock { min-width: 70px; text-align: center; font-family: Consolas, monospace; color: #fff; }
@@ -50,7 +55,7 @@
     .tl-stay { background: #5da2e8; }
     .tl-cursor { position: absolute; top: 4px; bottom: 4px; width: 2px; background: #fff; box-shadow: 0 0 8px #fff; }
     .tl-tick { position: absolute; bottom: 3px; font-size: 10px; color: #7f8ca8; transform: translateX(-50%); }
-    #legend { display: none; position: absolute; top: 62px; right: 12px; z-index: 910; width: 300px; padding: 14px; border: 1px solid #31517f; border-radius: 8px; background: #101b34ee; font-size: 12px; line-height: 1.5; box-shadow: 0 3px 10px #0009; }
+    #legend { display: none; position: absolute; top: 62px; right: 12px; z-index: 910; width: 310px; padding: 14px; border: 1px solid #31517f; border-radius: 8px; background: #101b34ee; font-size: 12px; line-height: 1.5; box-shadow: 0 3px 10px #0009; }
     #legend.show { display: block; }
     #legend h3 { margin: 0 0 8px; color: #ff5f78; font-size: 14px; }
     .legend-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
@@ -61,6 +66,9 @@
     .tri { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 15px solid #fff; background: none; }
     .dia { transform: rotate(45deg); }
     .node-label { min-width: 24px; height: 24px; line-height: 21px; text-align: center; border-radius: 16px; color: #fff; border: 2px solid #fff; font-weight: 800; font-size: 12px; box-shadow: 0 1px 6px #000c; }
+    .node-stack { display: inline-flex; align-items: stretch; min-height: 24px; border: 2px solid #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 1px 7px #000d; background: #10203a; }
+    .node-seg { min-width: 25px; height: 24px; line-height: 22px; text-align: center; color: #fff; font-weight: 900; font-size: 12px; text-shadow: 0 1px 2px #000b; border-right: 1px solid #ffffff55; }
+    .node-seg:last-child { border-right: 0; }
     .raw-marker { width: 14px; height: 14px; border: 2px solid #fff; background: #ffffff25; }
     .raw-T { border-radius: 50%; }
     .raw-C { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 14px solid #fff; background: none; }
@@ -79,12 +87,9 @@
     <div id="head">
       <h1>Mobility Fusion Open Demo</h1>
       <div id="stats">loading...</div>
+      <label class="field-label" for="city">City sample / 样本城市</label>
       <select id="city" onchange="loadCity(this.value)"></select>
       <input id="search" placeholder="Search UUID..." oninput="renderList(this.value)" />
-      <div id="toggles">
-        <button id="rawToggle" class="toggle active" onclick="toggleRaw()">Raw points</button>
-        <button id="dropToggle" class="toggle active" onclick="toggleDrop()">Drop/Suppress</button>
-      </div>
     </div>
     <div id="uuid-list"></div>
   </aside>
@@ -98,11 +103,11 @@
         <span id="clock">--:--:--</span>
       </div>
       <div id="toolbar">
-        <button class="btn active">FULL_OD</button>
-        <button class="btn active">H3 res=10</button>
+        <button id="rawToggle" class="btn active" onclick="toggleRaw()">Raw points</button>
+        <button id="dropToggle" class="btn active" onclick="toggleDrop()">Drop/Suppress</button>
         <button class="btn" onclick="toggleLegend()">Legend</button>
       </div>
-      <div id="legend">
+      <div id="legend" class="show">
         <h3>Legend / 图例</h3>
         <div class="legend-row"><span class="sw" style="background:#2ecc7140;border-color:#2ecc71"></span>DAY_START / 起点</div>
         <div class="legend-row"><span class="sw" style="background:#3498db30;border-color:#3498db"></span>STAY / 稳定停留</div>
@@ -110,12 +115,12 @@
         <div class="legend-row"><span class="sw" style="background:#e74c3c40;border-color:#e74c3c"></span>DAY_END / 终点</div>
         <div class="legend-row"><span class="line"></span>OD segment / OD 连线</div>
         <div class="legend-row"><span class="line cross"></span>cross-city / 跨城</div>
-        <div style="margin-top:8px;color:#b9d7ff;font-weight:700">Raw points / 原始标准化点</div>
+        <div style="margin-top:8px;color:#b9d7ff;font-weight:700">Raw points / 原始数据点类型</div>
         <div class="legend-row"><span class="shape raw-T"></span>Timing</div>
         <div class="legend-row"><span class="tri"></span>WiFiConnect</div>
         <div class="legend-row"><span class="shape raw-W"></span>WiFiStable</div>
         <div class="legend-row"><span class="shape raw-S dia"></span>SceneReco</div>
-        <div class="legend-row"><span class="shape raw-drop"></span>explicit drop / suppressed</div>
+        <div class="legend-row"><span class="shape raw-drop"></span>explicit drop / suppressed / 明确剔除或压制</div>
       </div>
     </div>
     <div id="timeline"></div>
@@ -214,8 +219,8 @@
         div.onclick = () => selectUUID(item.uuid);
         div.innerHTML = `<div class="id">${item.short || item.uuid}</div>
           <span class="badge">${item.nodes || 0}N ${item.od || 0}OD</span>
-          <span class="badge">${item.st || 0} stay</span>
-          <span class="badge">${item.sp || 0} stop</span>
+          <span class="badge stay">${item.st || 0} stay</span>
+          <span class="badge stop">${item.sp || 0} stop</span>
           ${(item.cross||0) ? `<span class="badge cross">${item.cross} cross</span>` : ""}
           ${(item.hs||0) ? `<span class="badge hs">${item.hs} hs</span>` : ""}`;
         list.appendChild(div);
@@ -232,9 +237,9 @@
       clearMap();
       const d = DATA.uuid_data[uuid];
       if (!d) return;
-      const nodeByOrder = new Map((d.nodes || []).map(n => [n.o, n]));
-      const usedCells = new Set((d.nodes || []).map(n => n.h3));
-      for (const n of d.nodes || []) {
+      const nodeGroups = groupNodesByH3(d.nodes || []);
+      for (const group of nodeGroups) {
+        const n = dominantNode(group);
         const poly = DATA.hex[n.h3];
         if (!poly) continue;
         L.polygon(poly.map(x => [x[1], x[0]]), {
@@ -242,8 +247,9 @@
           weight: n.r === "STAY" ? 2 : 1.5,
           fillColor: ROLE_COLOR[n.r] || "#9bc8ff",
           fillOpacity: n.r === "STAY" ? .16 : .10
-        }).bindTooltip(nodeTip(n)).addTo(layers.hex);
+        }).bindTooltip(groupTip(group)).addTo(layers.hex);
       }
+      const nodeByOrder = new Map((d.nodes || []).map(n => [n.o, n]));
       for (const od of d.od || []) {
         const a = nodeByOrder.get(od.on), b = nodeByOrder.get(od.dn);
         if (!a || !b) continue;
@@ -254,16 +260,41 @@
           dashArray: od.cross ? "8,7" : null
         }).bindTooltip(odTip(od)).addTo(layers.od);
       }
-      for (const n of d.nodes || []) {
+      for (const group of nodeGroups) {
+        const n = dominantNode(group);
+        const markerWidth = group.length > 1 ? group.length * 25 : 24;
         L.marker([n.lat,n.lon], {
-          icon: L.divIcon({className:"", html:`<div class="node-label" style="background:${ROLE_COLOR[n.r]||"#3498db"}">${n.o}</div>`, iconSize:[24,24], iconAnchor:[12,12]})
-        }).bindTooltip(nodeTip(n)).addTo(layers.nodes);
+          icon: L.divIcon({className:"", html:nodeStackHTML(group), iconSize:[markerWidth,24], iconAnchor:[markerWidth/2,12]})
+        }).bindTooltip(groupTip(group)).addTo(layers.nodes);
       }
       renderRaw(d);
       renderTimeline(d);
       renderPanel(uuid, d);
       const all = [...(d.nodes || []).map(n => [n.lat,n.lon])];
       if (all.length) map.fitBounds(all, {padding:[70,70], maxZoom: 15});
+    }
+    function groupNodesByH3(nodes) {
+      const groups = new Map();
+      for (const n of nodes) {
+        const key = n.h3 || `${n.lat},${n.lon}`;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(n);
+      }
+      return [...groups.values()].map(g => g.sort((a,b) => Number(a.o) - Number(b.o)));
+    }
+    function dominantNode(group) {
+      const rank = {DAY_START: 4, DAY_END: 3, STAY: 2, STOP: 1};
+      return [...group].sort((a,b) => (rank[b.r] || 0) - (rank[a.r] || 0) || Number(a.o) - Number(b.o))[0];
+    }
+    function nodeStackHTML(group) {
+      if (group.length === 1) {
+        const n = group[0];
+        return `<div class="node-label" style="background:${ROLE_COLOR[n.r]||"#3498db"}">${n.o}</div>`;
+      }
+      return `<div class="node-stack">${group.map(n => `<span class="node-seg" style="background:${ROLE_COLOR[n.r]||"#3498db"}">${n.o}</span>`).join("")}</div>`;
+    }
+    function groupTip(group) {
+      return group.map(nodeTip).join("<hr style='border:0;border-top:1px solid #999;margin:5px 0'>");
     }
     function nodeTip(n) {
       return `<b>#${n.o} ${n.r}</b><br>${n.t0}-${n.t1}<br>${n.dur}s, ${n.ec} events<br>${n.city || ""}<br>${n.h3}<br>${n.pn || ""}`;
@@ -309,9 +340,32 @@
       const m = String(t || "00:00:00").match(/(\d\d):(\d\d):(\d\d)$/);
       return m ? (+m[1]*3600 + +m[2]*60 + +m[3]) : 0;
     }
+    function focusNode(order) {
+      const d = DATA.uuid_data[currentUUID];
+      const n = (d?.nodes || []).find(x => Number(x.o) === Number(order));
+      if (!n || n.lat == null || n.lon == null) return;
+      map.setView([n.lat, n.lon], 16);
+      L.popup({autoPan:true})
+        .setLatLng([n.lat, n.lon])
+        .setContent(nodeTip(n))
+        .openOn(map);
+    }
+    function focusOD(order) {
+      const d = DATA.uuid_data[currentUUID];
+      const od = (d?.od || []).find(x => Number(x.so) === Number(order));
+      if (!od) return;
+      const byOrder = new Map((d.nodes || []).map(n => [Number(n.o), n]));
+      const a = byOrder.get(Number(od.on)), b = byOrder.get(Number(od.dn));
+      if (!a || !b) return;
+      map.fitBounds([[a.lat, a.lon], [b.lat, b.lon]], {padding:[90,90], maxZoom:16});
+      L.popup({autoPan:true})
+        .setLatLng([(a.lat + b.lat) / 2, (a.lon + b.lon) / 2])
+        .setContent(odTip(od))
+        .openOn(map);
+    }
     function renderPanel(uuid, d) {
-      const nodes = (d.nodes || []).map(n => `<tr><td>${n.o}</td><td class="role-${n.r}">${n.r}</td><td>${n.h3}</td><td>${n.city||""}</td><td>${n.t0}</td><td>${n.t1}</td><td>${n.dur}</td><td>${n.ec}</td><td>${n.pn||"-"}</td></tr>`).join("");
-      const od = (d.od || []).map(o => `<tr><td>${o.so}</td><td>${o.on}->${o.dn}</td><td>${o.dt}</td><td>${o.at}</td><td>${o.tt??"-"}</td><td>${o.dm??"-"}</td><td class="${(o.spd||0)>170?"speed-high":"speed-ok"}">${o.spd??"-"}</td><td>${o.cross?"YES":"-"}</td></tr>`).join("");
+      const nodes = (d.nodes || []).map(n => `<tr class="click-row" onclick="focusNode(${n.o})"><td>${n.o}</td><td class="role-${n.r}">${n.r}</td><td>${n.h3}</td><td>${n.city||""}</td><td>${n.t0}</td><td>${n.t1}</td><td>${n.dur}</td><td>${n.ec}</td><td>${n.pn||"-"}</td></tr>`).join("");
+      const od = (d.od || []).map(o => `<tr class="click-row" onclick="focusOD(${o.so})"><td>${o.so}</td><td>${o.on}->${o.dn}</td><td>${o.dt}</td><td>${o.at}</td><td>${o.tt??"-"}</td><td>${o.dm??"-"}</td><td class="${(o.spd||0)>170?"speed-high":"speed-ok"}">${o.spd??"-"}</td><td>${o.cross?"YES":"-"}</td></tr>`).join("");
       const es = d.event_summary || {};
       document.getElementById("panel").innerHTML = `<h2>${uuid.slice(0,18)}... | ${d.nodes?.length||0} nodes, ${d.od?.length||0} OD</h2>
         <div style="margin-bottom:8px;color:#9fb3d9">Events: raw ${es.raw_total ?? es.total ?? 0}, kept ${es.kept ?? 0}, suppressed ${es.anchor_suppressed ?? 0}, dropped ${es.dropped ?? 0} | STAY ${es.stays ?? 0}, STOP ${es.stops ?? 0}</div>
