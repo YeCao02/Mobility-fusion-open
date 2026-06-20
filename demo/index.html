@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobility Fusion Open Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; height: 100vh; overflow: hidden; display: flex; background: #0b1020; color: #dce7ff; font-family: "Segoe UI", Arial, sans-serif; }
+    #sidebar { width: 330px; flex-shrink: 0; display: flex; flex-direction: column; background: #111c35; border-right: 1px solid #25436f; }
+    #head { padding: 12px; background: #0e1830; border-bottom: 1px solid #25436f; }
+    h1 { margin: 0 0 6px; color: #ff5f78; font-size: 15px; }
+    #stats { color: #9fb3d9; font-size: 11px; line-height: 1.5; }
+    select, input, button { font: inherit; }
+    #city, #search { width: 100%; margin-top: 8px; padding: 8px 9px; border-radius: 6px; border: 1px solid #31517f; background: #0b1020; color: #dce7ff; }
+    #toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+    .toggle, .btn { border: 1px solid #31517f; border-radius: 6px; color: #dce7ff; background: #172744; padding: 7px 10px; cursor: pointer; }
+    .toggle.active, .btn.active { background: #4f8fd8; color: #fff; box-shadow: inset 0 0 0 1px #dbeafe66; }
+    #uuid-list { overflow: auto; flex: 1; }
+    .uuid { padding: 9px 12px; border-bottom: 1px solid #20375d; cursor: pointer; font-size: 12px; }
+    .uuid:hover { background: #172744; }
+    .uuid.active { background: #e94560; color: #fff; }
+    .uuid .id { font-family: Consolas, monospace; }
+    .badge { display: inline-block; margin: 4px 3px 0 0; padding: 2px 5px; border-radius: 4px; font-size: 10px; background: #243b63; color: #b9d7ff; }
+    .badge.cross { background: #e94560; color: #fff; }
+    .badge.hs { background: #f1c40f; color: #111; }
+    #main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    #map { flex: 1; min-height: 0; position: relative; background: #060912; }
+    #panel { height: 280px; flex-shrink: 0; overflow: auto; background: #141d38; border-top: 2px solid #e94560; padding: 10px; }
+    #panel h2 { margin: 0 0 8px; color: #ff5f78; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    th, td { padding: 4px 6px; border: 1px solid #25436f; text-align: left; vertical-align: top; }
+    th { background: #203a66; color: #b9d7ff; position: sticky; top: 0; z-index: 1; }
+    .role-DAY_START { color: #5ee27d; font-weight: 700; }
+    .role-STAY { color: #64a9ff; }
+    .role-STOP { color: #f2d04f; }
+    .role-DAY_END { color: #ff6b4a; font-weight: 700; }
+    .speed-high { color: #ff6b4a; font-weight: 700; }
+    .speed-ok { color: #5ee27d; }
+    #toolbar { position: absolute; top: 10px; right: 12px; z-index: 900; display: flex; gap: 10px; align-items: center; }
+    #toolbar .btn { min-width: 116px; font-weight: 700; box-shadow: 0 3px 10px #0009; }
+    #anim { position: absolute; top: 10px; left: 52px; z-index: 900; display: flex; gap: 6px; align-items: center; padding: 7px; border: 1px solid #31517f; border-radius: 8px; background: #101b34ee; box-shadow: 0 3px 10px #0009; }
+    #anim button, #anim select { border: 1px solid #31517f; border-radius: 5px; background: #172744; color: #dce7ff; padding: 4px 8px; cursor: pointer; }
+    #clock { min-width: 70px; text-align: center; font-family: Consolas, monospace; color: #fff; }
+    #timeline { height: 54px; flex-shrink: 0; position: relative; background: #121934; border-top: 1px solid #25436f; border-bottom: 1px solid #25436f; }
+    .tl-node { position: absolute; top: 10px; height: 24px; border-radius: 4px; opacity: .9; }
+    .tl-stop { background: #f1c40f; width: 4px; }
+    .tl-stay { background: #5da2e8; }
+    .tl-cursor { position: absolute; top: 4px; bottom: 4px; width: 2px; background: #fff; box-shadow: 0 0 8px #fff; }
+    .tl-tick { position: absolute; bottom: 3px; font-size: 10px; color: #7f8ca8; transform: translateX(-50%); }
+    #legend { display: none; position: absolute; top: 62px; right: 12px; z-index: 910; width: 300px; padding: 14px; border: 1px solid #31517f; border-radius: 8px; background: #101b34ee; font-size: 12px; line-height: 1.5; box-shadow: 0 3px 10px #0009; }
+    #legend.show { display: block; }
+    #legend h3 { margin: 0 0 8px; color: #ff5f78; font-size: 14px; }
+    .legend-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+    .sw { width: 18px; height: 18px; border: 1px solid #fff8; flex-shrink: 0; }
+    .line { width: 28px; height: 0; border-top: 3px solid #a9d1ff; flex-shrink: 0; }
+    .line.cross { border-top-style: dashed; border-color: #b97cff; }
+    .shape { width: 15px; height: 15px; border: 2px solid #fff; background: #ffffff22; flex-shrink: 0; }
+    .tri { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 15px solid #fff; background: none; }
+    .dia { transform: rotate(45deg); }
+    .node-label { min-width: 24px; height: 24px; line-height: 21px; text-align: center; border-radius: 16px; color: #fff; border: 2px solid #fff; font-weight: 800; font-size: 12px; box-shadow: 0 1px 6px #000c; }
+    .raw-marker { width: 14px; height: 14px; border: 2px solid #fff; background: #ffffff25; }
+    .raw-T { border-radius: 50%; }
+    .raw-C { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 14px solid #fff; background: none; }
+    .raw-W { border-radius: 1px; }
+    .raw-S { transform: rotate(45deg); }
+    .raw-drop::after { content: "×"; position: absolute; left: -2px; top: -8px; color: #111; font-weight: 900; font-size: 22px; text-shadow: 0 0 3px #fff,0 0 5px #fff; }
+    .raw-suppress { opacity: .65; }
+    .anim-dot { width: 20px; height: 20px; border-radius: 50%; border: 3px solid #fff; background: #e94560; box-shadow: 0 0 16px #fff, 0 0 12px #e94560; }
+    #loading { display: none; position: absolute; inset: 0; z-index: 1200; align-items: center; justify-content: center; background: #061022cc; }
+    #loading.show { display: flex; }
+    #loading div { padding: 16px 22px; border: 1px solid #31517f; border-radius: 8px; background: #101b34; color: #dce7ff; }
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <div id="head">
+      <h1>Mobility Fusion Open Demo</h1>
+      <div id="stats">loading...</div>
+      <select id="city" onchange="loadCity(this.value)"></select>
+      <input id="search" placeholder="Search UUID..." oninput="renderList(this.value)" />
+      <div id="toggles">
+        <button id="rawToggle" class="toggle active" onclick="toggleRaw()">Raw points</button>
+        <button id="dropToggle" class="toggle active" onclick="toggleDrop()">Drop/Suppress</button>
+      </div>
+    </div>
+    <div id="uuid-list"></div>
+  </aside>
+  <main id="main">
+    <div id="map">
+      <div id="loading"><div id="loadingText">Loading...</div></div>
+      <div id="anim">
+        <button onclick="togglePlay()" id="play">Play</button>
+        <button onclick="resetAnim()">Reset</button>
+        <select id="speed"><option value="600">slow</option><option value="250" selected>normal</option><option value="80">fast</option></select>
+        <span id="clock">--:--:--</span>
+      </div>
+      <div id="toolbar">
+        <button class="btn active">FULL_OD</button>
+        <button class="btn active">H3 res=10</button>
+        <button class="btn" onclick="toggleLegend()">Legend</button>
+      </div>
+      <div id="legend">
+        <h3>Legend / 图例</h3>
+        <div class="legend-row"><span class="sw" style="background:#2ecc7140;border-color:#2ecc71"></span>DAY_START / 起点</div>
+        <div class="legend-row"><span class="sw" style="background:#3498db30;border-color:#3498db"></span>STAY / 稳定停留</div>
+        <div class="legend-row"><span class="sw" style="background:#f1c40f30;border-color:#f1c40f"></span>STOP / 短时可信点</div>
+        <div class="legend-row"><span class="sw" style="background:#e74c3c40;border-color:#e74c3c"></span>DAY_END / 终点</div>
+        <div class="legend-row"><span class="line"></span>OD segment / OD 连线</div>
+        <div class="legend-row"><span class="line cross"></span>cross-city / 跨城</div>
+        <div style="margin-top:8px;color:#b9d7ff;font-weight:700">Raw points / 原始标准化点</div>
+        <div class="legend-row"><span class="shape raw-T"></span>Timing</div>
+        <div class="legend-row"><span class="tri"></span>WiFiConnect</div>
+        <div class="legend-row"><span class="shape raw-W"></span>WiFiStable</div>
+        <div class="legend-row"><span class="shape raw-S dia"></span>SceneReco</div>
+        <div class="legend-row"><span class="shape raw-drop"></span>explicit drop / suppressed</div>
+      </div>
+    </div>
+    <div id="timeline"></div>
+    <div id="panel"><h2>Select a UUID</h2></div>
+  </main>
+  <script>
+    const map = L.map("map", {preferCanvas: true}).setView([23.15, 113.35], 9);
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {attribution: "&copy; OpenStreetMap &copy; CARTO", maxZoom: 20}).addTo(map);
+    let manifest = null;
+    let DATA = {stats:{}, uuid_summary:[], uuid_data:{}, hex:{}};
+    let currentCity = "";
+    let currentUUID = "";
+    let showRaw = true;
+    let showDrop = true;
+    let playing = false;
+    let animTimer = null;
+    let animIndex = 0;
+    let animMarker = null;
+    const layers = {
+      hex: L.layerGroup().addTo(map),
+      od: L.layerGroup().addTo(map),
+      nodes: L.layerGroup().addTo(map),
+      raw: L.layerGroup().addTo(map)
+    };
+    const ROLE_COLOR = {DAY_START:"#2ecc71", STAY:"#3498db", STOP:"#f1c40f", DAY_END:"#e74c3c"};
+    const SOURCE_NAME = {T:"Timing", C:"WiFiConnect", W:"WiFiStable", S:"SceneReco"};
+
+    function showLoading(text, active=true) {
+      document.getElementById("loadingText").textContent = text || "Loading...";
+      document.getElementById("loading").classList.toggle("show", !!active);
+    }
+    async function getJSON(url) {
+      const resp = await fetch(`${url}?v=${Date.now()}`, {cache:"no-store"});
+      if (!resp.ok) throw new Error(`${url}: ${resp.status}`);
+      return await resp.json();
+    }
+    function mergeProcessedRaw(processed, raw) {
+      const out = JSON.parse(JSON.stringify(processed));
+      for (const [caseId, rawCase] of Object.entries((raw && raw.uuid_data) || {})) {
+        if (!out.uuid_data[caseId]) continue;
+        out.uuid_data[caseId].events = rawCase.events || [];
+        const oldSummary = out.uuid_data[caseId].event_summary || {};
+        out.uuid_data[caseId].event_summary = {...rawCase.event_summary, ...oldSummary, raw_total: rawCase.event_summary?.total || 0};
+      }
+      return out;
+    }
+    function concatPayloads(payloads) {
+      const merged = {generated_at:"", chain_mode:"FULL_OD", h3_res:10, stats:{uuid_count:0,node_count:0,od_count:0,event_count:0,stay_count:0,stop_count:0}, uuid_summary:[], uuid_data:{}, hex:{}, h3_city:{}, city_boundary:{type:"FeatureCollection",features:[]}};
+      for (const p of payloads) {
+        Object.assign(merged.hex, p.hex || {});
+        Object.assign(merged.h3_city, p.h3_city || {});
+        merged.uuid_summary.push(...(p.uuid_summary || []));
+        Object.assign(merged.uuid_data, p.uuid_data || {});
+        for (const [k,v] of Object.entries(p.stats || {})) merged.stats[k] = (merged.stats[k] || 0) + (Number(v) || 0);
+      }
+      merged.stats.uuid_count = merged.uuid_summary.length;
+      merged.uuid_summary.sort((a,b) => (b.score||0)-(a.score||0) || String(a.uuid).localeCompare(String(b.uuid)));
+      return merged;
+    }
+    async function init() {
+      showLoading("Loading manifest...");
+      manifest = await getJSON("data/manifest.json");
+      const citySelect = document.getElementById("city");
+      for (const [abbr, meta] of Object.entries(manifest.cities || {})) {
+        const opt = document.createElement("option");
+        opt.value = abbr;
+        opt.textContent = `${abbr.toUpperCase()} - ${meta.name}`;
+        citySelect.appendChild(opt);
+      }
+      currentCity = citySelect.value || Object.keys(manifest.cities)[0];
+      await loadCity(currentCity);
+    }
+    async function loadCity(city) {
+      stopPlay();
+      currentCity = city;
+      showLoading(`Loading ${city.toUpperCase()} demo shards...`);
+      const files = manifest.cities[city].files || [];
+      const payloads = [];
+      for (const f of files) {
+        const [processed, raw] = await Promise.all([getJSON(f.processed), getJSON(f.raw)]);
+        payloads.push(mergeProcessedRaw(processed, raw));
+      }
+      DATA = concatPayloads(payloads);
+      document.getElementById("stats").textContent = `${city.toUpperCase()} | ${DATA.stats.uuid_count} UUID-day | ${DATA.stats.node_count} nodes | ${DATA.stats.od_count} OD | raw matched by shards`;
+      showLoading("", false);
+      renderList();
+      if (DATA.uuid_summary.length) selectUUID(DATA.uuid_summary[0].uuid);
+    }
+    function renderList(query="") {
+      const q = String(query || "").toLowerCase();
+      const list = document.getElementById("uuid-list");
+      list.innerHTML = "";
+      for (const item of DATA.uuid_summary.filter(x => !q || String(x.uuid).toLowerCase().includes(q)).slice(0, 5000)) {
+        const div = document.createElement("div");
+        div.className = `uuid ${item.uuid === currentUUID ? "active" : ""}`;
+        div.onclick = () => selectUUID(item.uuid);
+        div.innerHTML = `<div class="id">${item.short || item.uuid}</div>
+          <span class="badge">${item.nodes || 0}N ${item.od || 0}OD</span>
+          <span class="badge">${item.st || 0} stay</span>
+          <span class="badge">${item.sp || 0} stop</span>
+          ${(item.cross||0) ? `<span class="badge cross">${item.cross} cross</span>` : ""}
+          ${(item.hs||0) ? `<span class="badge hs">${item.hs} hs</span>` : ""}`;
+        list.appendChild(div);
+      }
+    }
+    function clearMap() {
+      stopPlay();
+      Object.values(layers).forEach(l => l.clearLayers());
+      if (animMarker) { map.removeLayer(animMarker); animMarker = null; }
+    }
+    function selectUUID(uuid) {
+      currentUUID = uuid;
+      renderList(document.getElementById("search").value);
+      clearMap();
+      const d = DATA.uuid_data[uuid];
+      if (!d) return;
+      const nodeByOrder = new Map((d.nodes || []).map(n => [n.o, n]));
+      const usedCells = new Set((d.nodes || []).map(n => n.h3));
+      for (const n of d.nodes || []) {
+        const poly = DATA.hex[n.h3];
+        if (!poly) continue;
+        L.polygon(poly.map(x => [x[1], x[0]]), {
+          color: ROLE_COLOR[n.r] || "#9bc8ff",
+          weight: n.r === "STAY" ? 2 : 1.5,
+          fillColor: ROLE_COLOR[n.r] || "#9bc8ff",
+          fillOpacity: n.r === "STAY" ? .16 : .10
+        }).bindTooltip(nodeTip(n)).addTo(layers.hex);
+      }
+      for (const od of d.od || []) {
+        const a = nodeByOrder.get(od.on), b = nodeByOrder.get(od.dn);
+        if (!a || !b) continue;
+        L.polyline([[a.lat,a.lon],[b.lat,b.lon]], {
+          color: od.cross ? "#b97cff" : "#a9d1ff",
+          weight: od.cross ? 2.3 : 2,
+          opacity: .8,
+          dashArray: od.cross ? "8,7" : null
+        }).bindTooltip(odTip(od)).addTo(layers.od);
+      }
+      for (const n of d.nodes || []) {
+        L.marker([n.lat,n.lon], {
+          icon: L.divIcon({className:"", html:`<div class="node-label" style="background:${ROLE_COLOR[n.r]||"#3498db"}">${n.o}</div>`, iconSize:[24,24], iconAnchor:[12,12]})
+        }).bindTooltip(nodeTip(n)).addTo(layers.nodes);
+      }
+      renderRaw(d);
+      renderTimeline(d);
+      renderPanel(uuid, d);
+      const all = [...(d.nodes || []).map(n => [n.lat,n.lon])];
+      if (all.length) map.fitBounds(all, {padding:[70,70], maxZoom: 15});
+    }
+    function nodeTip(n) {
+      return `<b>#${n.o} ${n.r}</b><br>${n.t0}-${n.t1}<br>${n.dur}s, ${n.ec} events<br>${n.city || ""}<br>${n.h3}<br>${n.pn || ""}`;
+    }
+    function odTip(o) {
+      return `<b>OD ${o.on}->${o.dn}</b><br>${o.dt}-${o.at}<br>${o.tt ?? "-"}s, ${o.dm ?? "-"}m<br>${o.spd ?? "-"} km/h`;
+    }
+    function renderRaw(d) {
+      layers.raw.clearLayers();
+      if (!showRaw) return;
+      for (const e of d.events || []) {
+        const [lon, lat, src, status, order, t0, t1] = e;
+        if ((status === "D" || status === "S") && !showDrop) continue;
+        const cls = `raw-marker raw-${src} ${(status === "D" || status === "S") ? "raw-drop raw-suppress" : ""}`;
+        L.marker([lat, lon], {
+          icon: L.divIcon({className:"", html:`<div class="${cls}"></div>`, iconSize:[18,18], iconAnchor:[9,9]})
+        }).bindTooltip(`#${order} ${SOURCE_NAME[src] || src} ${status}<br>${t0}-${t1}`).addTo(layers.raw);
+      }
+    }
+    function renderTimeline(d) {
+      const tl = document.getElementById("timeline");
+      tl.innerHTML = "";
+      const base = 24 * 3600;
+      for (let h=0; h<=24; h+=2) {
+        const x = h / 24 * 100;
+        const t = document.createElement("div");
+        t.className = "tl-tick";
+        t.style.left = `${x}%`;
+        t.textContent = `${String(h).padStart(2,"0")}:00`;
+        tl.appendChild(t);
+      }
+      for (const n of d.nodes || []) {
+        const s = secondsOfDay(n.t0), e = Math.max(secondsOfDay(n.t1), s + 60);
+        const div = document.createElement("div");
+        div.className = `tl-node ${n.r === "STOP" ? "tl-stop" : "tl-stay"}`;
+        div.style.left = `${Math.max(0, Math.min(100, s / base * 100))}%`;
+        div.style.width = `${n.r === "STOP" ? 4 : Math.max(.4, Math.min(100, (e-s)/base*100))}%`;
+        div.title = `#${n.o} ${n.r} ${n.t0}-${n.t1}`;
+        tl.appendChild(div);
+      }
+    }
+    function secondsOfDay(t) {
+      const m = String(t || "00:00:00").match(/(\d\d):(\d\d):(\d\d)$/);
+      return m ? (+m[1]*3600 + +m[2]*60 + +m[3]) : 0;
+    }
+    function renderPanel(uuid, d) {
+      const nodes = (d.nodes || []).map(n => `<tr><td>${n.o}</td><td class="role-${n.r}">${n.r}</td><td>${n.h3}</td><td>${n.city||""}</td><td>${n.t0}</td><td>${n.t1}</td><td>${n.dur}</td><td>${n.ec}</td><td>${n.pn||"-"}</td></tr>`).join("");
+      const od = (d.od || []).map(o => `<tr><td>${o.so}</td><td>${o.on}->${o.dn}</td><td>${o.dt}</td><td>${o.at}</td><td>${o.tt??"-"}</td><td>${o.dm??"-"}</td><td class="${(o.spd||0)>170?"speed-high":"speed-ok"}">${o.spd??"-"}</td><td>${o.cross?"YES":"-"}</td></tr>`).join("");
+      const es = d.event_summary || {};
+      document.getElementById("panel").innerHTML = `<h2>${uuid.slice(0,18)}... | ${d.nodes?.length||0} nodes, ${d.od?.length||0} OD</h2>
+        <div style="margin-bottom:8px;color:#9fb3d9">Events: raw ${es.raw_total ?? es.total ?? 0}, kept ${es.kept ?? 0}, suppressed ${es.anchor_suppressed ?? 0}, dropped ${es.dropped ?? 0} | STAY ${es.stays ?? 0}, STOP ${es.stops ?? 0}</div>
+        <table><thead><tr><th>#</th><th>Role</th><th>H3</th><th>City</th><th>Start</th><th>End</th><th>Dur(s)</th><th>Events</th><th>SceneReco</th></tr></thead><tbody>${nodes}</tbody></table>
+        <h2 style="margin-top:12px">OD Segments</h2>
+        <table><thead><tr><th>#</th><th>O-D</th><th>Depart</th><th>Arrive</th><th>Time(s)</th><th>Dist(m)</th><th>Speed</th><th>Cross</th></tr></thead><tbody>${od}</tbody></table>`;
+    }
+    function toggleRaw() {
+      showRaw = !showRaw;
+      document.getElementById("rawToggle").classList.toggle("active", showRaw);
+      if (currentUUID) renderRaw(DATA.uuid_data[currentUUID]);
+    }
+    function toggleDrop() {
+      showDrop = !showDrop;
+      document.getElementById("dropToggle").classList.toggle("active", showDrop);
+      if (currentUUID) renderRaw(DATA.uuid_data[currentUUID]);
+    }
+    function toggleLegend() { document.getElementById("legend").classList.toggle("show"); }
+    function togglePlay() {
+      playing ? stopPlay() : startPlay();
+    }
+    function startPlay() {
+      const d = DATA.uuid_data[currentUUID];
+      if (!d || !(d.nodes || []).length) return;
+      playing = true;
+      document.getElementById("play").textContent = "Pause";
+      animTimer = setInterval(stepAnim, Number(document.getElementById("speed").value));
+    }
+    function stopPlay() {
+      playing = false;
+      document.getElementById("play").textContent = "Play";
+      if (animTimer) clearInterval(animTimer);
+      animTimer = null;
+    }
+    function resetAnim() {
+      stopPlay();
+      animIndex = 0;
+      stepAnim(true);
+    }
+    function stepAnim(force=false) {
+      const d = DATA.uuid_data[currentUUID];
+      const nodes = d?.nodes || [];
+      if (!nodes.length) return;
+      if (!force) animIndex = (animIndex + 1) % nodes.length;
+      const n = nodes[animIndex];
+      if (!animMarker) {
+        animMarker = L.marker([n.lat,n.lon], {icon:L.divIcon({className:"", html:'<div class="anim-dot"></div>', iconSize:[20,20], iconAnchor:[10,10]})}).addTo(map);
+      }
+      animMarker.setLatLng([n.lat,n.lon]);
+      document.getElementById("clock").textContent = n.t0 || "--:--:--";
+    }
+    init().catch(err => {
+      console.error(err);
+      showLoading(`Failed: ${err.message}`, true);
+    });
+  </script>
+</body>
+</html>

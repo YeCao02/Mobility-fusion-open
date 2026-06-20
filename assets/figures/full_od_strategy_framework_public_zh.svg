@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920">
+  <defs>
+    <style>
+      .title{font:800 36px "Microsoft YaHei UI","Microsoft YaHei","SimHei",sans-serif;fill:#0b5793}
+      .sub{font:600 17px "Microsoft YaHei UI","Microsoft YaHei","SimHei",sans-serif;fill:#52687b}
+      .head{font:800 23px "Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#fff}
+      .h2{font:800 20px "Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#173d5e}
+      .h3{font:800 17px "Microsoft YaHei","Noto Sans CJK SC",sans-serif;fill:#173d5e}
+      .body{font:600 15px "Microsoft YaHei UI","Microsoft YaHei","SimHei",sans-serif;fill:#294055}
+      .small{font:600 13px "Microsoft YaHei UI","Microsoft YaHei","SimHei",sans-serif;fill:#52687b}
+      .center{text-anchor:middle}.white{fill:#fff}
+      .card{fill:#fff;stroke:#a9bfd2;stroke-width:1.5;rx:8}
+      .blueCard{fill:#eff7fc;stroke:#72a8cf;stroke-width:1.5;rx:8}
+      .orangeCard{fill:#fff5eb;stroke:#df9a60;stroke-width:1.5;rx:8}
+      .greenCard{fill:#eff8ed;stroke:#82b173;stroke-width:1.5;rx:8}
+      .tealCard{fill:#edf8f6;stroke:#6dafaa;stroke-width:1.5;rx:8}
+      .purpleCard{fill:#f5f1fa;stroke:#a088c1;stroke-width:1.5;rx:8}
+      .arrow{stroke:#34708f;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="11" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0 0L10 4L0 8Z" fill="#34708f"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#6d8296" flood-opacity=".16"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="920" fill="#f8fbfd"/>
+  <rect width="1600" height="92" fill="#fff"/>
+  <rect width="18" height="92" fill="#0b65a8"/>
+  <text x="48" y="50" class="title">多源手机SDK定位数据融合与日内OD清洗-聚合框架</text>
+  <text x="50" y="78" class="sub">面向大规模异质手机事件的可解释时空证据融合、轨迹聚合与连续 OD 构建</text>
+
+  <rect x="30" y="112" width="1540" height="112" fill="#edf5fa" stroke="#b8cfdf" rx="8"/>
+  <rect x="55" y="132" width="360" height="72" class="blueCard" filter="url(#shadow)"/>
+  <text x="235" y="160" class="h2 center">异质原始事件</text>
+  <text x="235" y="187" class="body center">来源、精度、语义与上报节奏不同</text>
+  <path d="M430 168H570" class="arrow"/>
+  <rect x="585" y="126" width="430" height="84" class="orangeCard" filter="url(#shadow)"/>
+  <text x="800" y="157" class="h2 center" style="fill:#a6501a">可解释证据融合</text>
+  <text x="800" y="184" class="body center">统一空间单元 · 多源仲裁 · 时空一致性检查</text>
+  <path d="M1030 168H1170" class="arrow"/>
+  <rect x="1185" y="132" width="360" height="72" class="greenCard" filter="url(#shadow)"/>
+  <text x="1365" y="160" class="h2 center" style="fill:#2e6c32">可审计日内 OD 链</text>
+  <text x="1365" y="187" class="body center">走/留节点有序连接，证据可回溯</text>
+
+  <!-- Input panel -->
+  <rect x="30" y="246" width="380" height="554" fill="#f1f7fb" stroke="#72a8cf" stroke-width="2" rx="8"/>
+  <rect x="30" y="246" width="380" height="54" fill="#0b65a8" rx="8"/>
+  <rect x="30" y="282" width="380" height="18" fill="#0b65a8"/>
+  <text x="220" y="281" class="head center">I. 数据输入与统一表达</text>
+
+  <rect x="50" y="320" width="340" height="170" class="card"/>
+  <text x="220" y="350" class="h2 center">四类互补证据</text>
+  <circle cx="82" cy="382" r="13" fill="#2463a8"/><text x="82" y="387" class="small white center">S</text>
+  <text x="108" y="388" class="body"><tspan font-weight="800" fill="#2463a8">SceneReco</tspan><tspan>：场景与地点语义</tspan></text>
+  <circle cx="82" cy="414" r="13" fill="#167d6d"/><text x="82" y="419" class="small white center">C</text>
+  <text x="108" y="420" class="body"><tspan font-weight="800" fill="#167d6d">WiFiConnect</tspan><tspan>：连接位置证据</tspan></text>
+  <circle cx="82" cy="446" r="13" fill="#6c4aa1"/><text x="82" y="451" class="small white center">W</text>
+  <text x="108" y="452" class="body"><tspan font-weight="800" fill="#6c4aa1">WiFiStable</tspan><tspan>：高覆盖驻留证据</tspan></text>
+  <circle cx="82" cy="478" r="13" fill="#df6a1e"/><text x="82" y="483" class="small white center">T</text>
+  <text x="108" y="484" class="body"><tspan font-weight="800" fill="#df6a1e">Timing</tspan><tspan>：移动过程位置证据</tspan></text>
+
+  <rect x="50" y="510" width="340" height="170" class="blueCard"/>
+  <text x="220" y="540" class="h2 center">标准化与空间编码</text>
+  <text x="72" y="570" class="body">• 统一字段、UTC+8时间与坐标语义</text>
+  <text x="72" y="600" class="body">• H3 res10：事件定位与日链节点单元</text>
+  <text x="72" y="630" class="body">• H3 res9：父级索引与区域汇总尺度</text>
+  <text x="72" y="660" class="small">保留两级H3索引，支持尺度转换与聚合分析</text>
+
+  <path d="M220 684V716" class="arrow"/>
+  <rect x="50" y="724" width="340" height="56" fill="#0b65a8" rx="8"/>
+  <text x="220" y="748" class="h3 white center">标准事件分片</text>
+  <text x="220" y="770" class="small white center">UUID 范围 · Parquet · 断点续跑</text>
+
+  <!-- Algorithm core -->
+  <rect x="430" y="246" width="740" height="554" fill="#fffdf9" stroke="#db8c4b" stroke-width="2.4" rx="8"/>
+  <rect x="430" y="246" width="740" height="54" fill="#dc6b24" rx="8"/>
+  <rect x="430" y="282" width="740" height="18" fill="#dc6b24"/>
+  <text x="800" y="281" class="head center">II. 核心算法：多源证据融合与轨迹一致性</text>
+
+  <rect x="450" y="320" width="700" height="54" class="orangeCard"/>
+  <text x="800" y="343" class="h3 center">来源优先级</text>
+  <text x="800" y="366" class="body center"><tspan fill="#2463a8" font-weight="800">SceneReco</tspan><tspan> ＞ </tspan><tspan fill="#167d6d" font-weight="800">WiFiConnect</tspan><tspan> ＞ </tspan><tspan fill="#6c4aa1" font-weight="800">WiFiStable</tspan><tspan> ＞ </tspan><tspan fill="#df6a1e" font-weight="800">Timing</tspan></text>
+
+  <rect x="450" y="394" width="335" height="166" class="purpleCard"/>
+  <circle cx="482" cy="424" r="18" fill="#6c4aa1"/><text x="482" y="430" class="h3 white center">1</text>
+  <text x="512" y="430" class="h3">局部可靠性增强</text>
+  <text x="472" y="466" class="body">• 局部成簇与多源支撑</text>
+  <text x="472" y="497" class="body">• 重叠冲突与漂移识别</text>
+  <text x="472" y="528" class="body">• 保留/剔除原因可追溯</text>
+
+  <rect x="815" y="394" width="335" height="166" class="greenCard"/>
+  <circle cx="847" cy="424" r="18" fill="#3b7d3a"/><text x="847" y="430" class="h3 white center">2</text>
+  <text x="877" y="430" class="h3">证据竞争仲裁</text>
+  <text x="837" y="466" class="body">• 来源优先级与持续性</text>
+  <text x="837" y="497" class="body">• 冲突位置上下文比较</text>
+  <text x="837" y="528" class="body">• 形成可信活动候选</text>
+
+  <rect x="450" y="580" width="335" height="166" class="blueCard"/>
+  <circle cx="482" cy="610" r="18" fill="#0b65a8"/><text x="482" y="616" class="h3 white center">3</text>
+  <text x="512" y="616" class="h3">H3 时空聚合</text>
+  <text x="472" y="652" class="body">• 自适应近邻吸收</text>
+  <text x="472" y="683" class="body">• 边界抖动与碎片恢复</text>
+  <text x="472" y="714" class="body">• 保留被吸收证据集合</text>
+
+  <rect x="815" y="580" width="335" height="166" class="tealCard"/>
+  <circle cx="847" cy="610" r="18" fill="#197c78"/><text x="847" y="616" class="h3 white center">4</text>
+  <text x="877" y="616" class="h3">轨迹一致性闭环</text>
+  <text x="837" y="652" class="body">• 时间顺序与运动合理性</text>
+  <text x="837" y="683" class="body">• 路径方向与交通语境</text>
+  <text x="837" y="714" class="body">• 异常节点与边界修复</text>
+
+  <rect x="450" y="758" width="700" height="24" fill="#dc6b24" rx="6"/>
+  <text x="800" y="775" class="small white center">裁决结果：保留节点 · 邻近吸收 · 异常剪枝 · 质量标记</text>
+
+  <!-- Output panel -->
+  <rect x="1190" y="246" width="380" height="554" fill="#f2f8ef" stroke="#82b173" stroke-width="2" rx="8"/>
+  <rect x="1190" y="246" width="380" height="54" fill="#3b7d3a" rx="8"/>
+  <rect x="1190" y="282" width="380" height="18" fill="#3b7d3a"/>
+  <text x="1380" y="281" class="head center">III. FULL_OD 日链与审计产出</text>
+
+  <rect x="1210" y="320" width="340" height="230" class="card"/>
+  <text x="1380" y="350" class="h2 center">完整日内节点链</text>
+  <rect x="1300" y="370" width="160" height="38" class="blueCard"/><text x="1380" y="395" class="body center">DAY_START</text>
+  <path d="M1380 410V434" class="arrow"/>
+  <rect x="1230" y="440" width="138" height="50" class="greenCard"/><text x="1299" y="461" class="h3 center">STAY</text><text x="1299" y="481" class="small center">稳定活动锚点</text>
+  <rect x="1392" y="440" width="138" height="50" class="orangeCard"/><text x="1461" y="461" class="h3 center">STOP</text><text x="1461" y="481" class="small center">可信过程节点</text>
+  <path d="M1380 494V516" class="arrow"/>
+  <rect x="1300" y="516" width="160" height="26" class="blueCard"/><text x="1380" y="535" class="body center">DAY_END</text>
+
+  <rect x="1210" y="570" width="340" height="100" class="greenCard"/>
+  <text x="1380" y="600" class="h2 center">相邻节点派生 OD</text>
+  <text x="1380" y="632" class="body center">保持日内顺序、重复到访与跨城联系</text>
+  <text x="1380" y="656" class="small center">物理有效性与分析保留口径分离</text>
+
+  <rect x="1210" y="690" width="340" height="90" class="tealCard"/>
+  <text x="1380" y="720" class="h2 center">紧凑结果与验证</text>
+  <text x="1380" y="750" class="body center">节点表 · OD表 · QC审计 · 可视化浏览器</text>
+  <text x="1380" y="772" class="small center">支持后续活动中心与跨市流动分析</text>
+
+  <!-- Bottom -->
+  <rect x="30" y="822" width="1540" height="70" fill="#fff" stroke="#a9bfd2" stroke-width="1.6" rx="8"/>
+  <text x="170" y="852" class="h2 center">可解释</text><text x="170" y="878" class="small center">裁决有据可查</text>
+  <text x="560" y="852" class="h2 center">连续</text><text x="560" y="878" class="small center">完整保留日内顺序</text>
+  <text x="950" y="852" class="h2 center">可扩展</text><text x="950" y="878" class="small center">面向大规模分片计算</text>
+  <text x="1340" y="852" class="h2 center">可复核</text><text x="1340" y="878" class="small center">验证浏览器与质量审计</text>
+</svg>
