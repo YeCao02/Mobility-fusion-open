@@ -1,6 +1,6 @@
 # Multi-source Mobile SDK Positioning Fusion and Daily OD Cleaning-Aggregation Framework
 
-[??](README.md) | [Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/)
+[中文](README.md) | [Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/)
 
 This repository is the public demonstration version of **Mobility Fusion**. It shows how heterogeneous PioneerData mobile SDK events can be standardized, fused, audited, and converted into interpretable daily `FULL_OD` chains. The public repository contains framework documentation, sampled demo data, and an interactive browser. It does not include full raw data or private production configuration.
 
@@ -50,18 +50,18 @@ These markers are intended for public visual audit and do not expose the full pr
 
 ```text
 .
-??? assets/figures/
-?   ??? full_od_strategy_framework_public_zh.png
-?   ??? full_od_strategy_framework_public_en.png
-?   ??? demo_preview.png
-??? demo/
-?   ??? index.html
-?   ??? data/
-?       ??? manifest.json
-?       ??? processed/
-?       ??? raw/
-??? scripts/
-    ??? build_open_demo_data.py
+|-- assets/figures/
+|   |-- full_od_strategy_framework_public_zh.png
+|   |-- full_od_strategy_framework_public_en.png
+|   `-- demo_preview.png
+|-- demo/
+|   |-- index.html
+|   `-- data/
+|       |-- manifest.json
+|       |-- processed/
+|       `-- raw/
+`-- scripts/
+    `-- build_open_demo_data.py
 ```
 
 ## Regenerating Public Demo Data
@@ -75,8 +75,8 @@ S:\GEO BIG data\Greater Bay Area data_operators 500G\mobility_fusion_production_
 Run:
 
 ```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" ".\scriptsuild_open_demo_data.py" `
-  --out ".\demo\data" `
+& "E:\ANACONDA\envs\GEO\python.exe" "./scripts/build_open_demo_data.py" `
+  --out "./demo/data" `
   --per-city 1000
 ```
 
