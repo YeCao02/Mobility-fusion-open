@@ -1,6 +1,6 @@
-# 多源手机 SDK 定位数据融合与日内 OD 清洗-聚合框架
+# 多源手机 SDK 定位融合与日内 OD 清洗-聚合框架
 
-[English](README_en.md) | [在线 Demo / Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/) | [上海验证 / Shanghai validation](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
+[English](README_en.md) | [在线 Demo / Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/) | [上海抽样回放 / Shanghai sample replay](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
 
 本仓库是 **Mobility Fusion** 的公开展示版本，用于说明 PioneerData 多源手机 SDK 原始事件如何被标准化、融合、审计，并构造为可解释的用户日内 `FULL_OD` 链。公开仓库仅包含框架说明、抽样 demo 数据和浏览器，不包含全量原始数据与私有生产配置。
 
@@ -10,18 +10,18 @@
 
 [![demo preview](assets/figures/demo_preview.png)](https://yecao02.github.io/Mobility-fusion-open/demo/)
 
-Demo 地址：[https://yecao02.github.io/Mobility-fusion-open/demo/](https://yecao02.github.io/Mobility-fusion-open/demo/)
+大湾区 demo：[https://yecao02.github.io/Mobility-fusion-open/demo/](https://yecao02.github.io/Mobility-fusion-open/demo/)
 
-上海 residence 原始数据验证页：[https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
+上海抽样回放页：[https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
 
-Demo 支持按城市加载样本，并同时显示两类数据：
+Demo 支持按城市和日期加载样本，并同时显示两类数据：
 
-- `processed`：生产管线输出的 `FULL_OD` H3 节点和 OD 段。
+- `processed`：原始 `mobility-fusion` 生产流程输出的 `FULL_OD` H3 节点和 OD 段。
 - `raw`：同一批 uuid-day 对应的标准化原始事件，用于审计哪些点被捕获、吸收、压制或剔除。
 
-样本规模为大湾区内地九市每城随机抽取约 1000 个 uuid-day，共 9000 个 uuid-day。为避免单文件过大，数据按城市和日期分片保存。
+大湾区样本为内地九市每城约 1000 个 uuid-day，共 9000 个 uuid-day。上海页面不是单独的质量验证逻辑，而是先从 `S:\GEO BIG data\Shanghai-2026` 的 `residence_*` 压缩原始文件中按天抽样，再改写为原始 `mobility-fusion` pipeline 的 `unified_points` 输入格式，最后使用同一套 `FULL_OD` 生产流程计算并转换为本 demo 的 `manifest + processed/raw` 分片格式。
 
-上海验证页使用 `S:\GEO BIG data\Shanghai-2026` 下 2026-05-01 至 2026-05-14 的 `residence_*` 原始压缩文件。每天按文件内 UUID 首次出现顺序抽取 100 个 uuid-day：第 1 天取第 1-100 个，第 2 天取第 201-300 个，以此类推。页面展示多源点位、跨源重叠冲突、短时大位移、高速跳跃、长时长与越界点等质量信号。
+上海样本范围为 2026-05-01 至 2026-05-14。每天按 `WifiStable` 文件内 UUID 首次出现顺序抽取 100 个 uuid-day：第 1 天取第 1-100 个，第 2 天取第 201-300 个，以此类推；同时过滤掉 2026-05-15 00:00:00 及之后的事件。
 
 ## 数据口径
 
@@ -38,7 +38,7 @@ Demo 支持按城市加载样本，并同时显示两类数据：
 SceneReco > WiFiConnect > WiFiStable > Timing
 ```
 
-当前公开 demo 使用 `FULL_OD` 口径：完成原始事件标准化、H3 编码、局部支撑校验、近邻吸收、防抖、速度与上下文检查后，保留日内连续的 `DAY_START / STAY / STOP / DAY_END` 节点，并由相邻节点生成 OD 段。
+公开 demo 使用 `FULL_OD` 口径：完成原始事件标准化、H3 编码、局部支撑校验、近邻吸收、防抖、速度与上下文检查后，保留日内连续的 `DAY_START / STAY / STOP / DAY_END` 节点，并由相邻节点生成 OD 段。
 
 ## Demo 状态说明
 
@@ -67,33 +67,58 @@ SceneReco > WiFiConnect > WiFiStable > Timing
 |       `-- raw/
 `-- scripts/
     |-- build_open_demo_data.py
-    `-- build_shanghai_validation.py
+    |-- prepare_shanghai_unified_sample.py
+    `-- build_shanghai_open_demo_data.py
 ```
 
 ## 重新生成公开 Demo 数据
 
-脚本默认从本地生产目录读取：
-
-```text
-S:\GEO BIG data\Greater Bay Area data_operators 500G\mobility_fusion_production_v0_4_0
-```
-
-运行方式：
-
 ```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" "./scripts/build_open_demo_data.py" `
-  --out "./demo/data" `
+& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\build_open_demo_data.py" `
+  --out ".\demo\data" `
   --per-city 1000
 ```
 
-脚本使用 Polars 按城市和日期分块读取 Parquet，避免一次性加载全量事件到内存。
+## 重新生成上海抽样回放数据
 
-## 重新生成上海验证页数据
+第一步，将上海 `residence_*` 抽样改写为原始 pipeline 的 `unified_points` 输入：
 
 ```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" "./scripts/build_shanghai_validation.py" `
-  --out "./demo/shanghai-validation/data/validation.json" `
-  --threads 24
+& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\prepare_shanghai_unified_sample.py" `
+  --out-root "S:\GEO BIG data\Shanghai-2026\sample_unified_points" `
+  --threads 24 `
+  --batch-size 50000 `
+  --batches-per-read 4 `
+  --overwrite
 ```
 
-脚本会自动发现并去重 `residence_Timing / residence_WifiConnect / residence_WifiStable / residence_SceneReco` 文件，适配本次上海原始压缩包的命名格式。
+第二步，在本地 `mobility-fusion` 完整代码仓库中运行原始生产 pipeline，`--spatial-filter-scope none` 用于避免沿用广佛空间过滤：
+
+```powershell
+& "E:\ANACONDA\envs\GEO\python.exe" "pipeline\run_production_pipeline.py" `
+  --raw-root "S:\GEO BIG data\Shanghai-2026\sample_unified_points" `
+  --raw-format unified_points `
+  --out-root "S:\GEO BIG data\Shanghai-2026\sample_mobility_fusion_v0_4_0" `
+  --date 2026-05-01 --date 2026-05-02 --date 2026-05-03 --date 2026-05-04 `
+  --date 2026-05-05 --date 2026-05-06 --date 2026-05-07 --date 2026-05-08 `
+  --date 2026-05-09 --date 2026-05-10 --date 2026-05-11 --date 2026-05-12 `
+  --date 2026-05-13 --date 2026-05-14 `
+  --canonical-h3-res 10 `
+  --parent-h3-res 9 `
+  --range-shard-target-rows 500000 `
+  --od-range-target-rows 200000 `
+  --ingest-polars-threads 4 `
+  --od-step-workers 12 `
+  --od-polars-threads 1 `
+  --od-start-stagger-sec 1 `
+  --core-output-only `
+  --no-analysis-tables `
+  --spatial-filter-scope none `
+  --force
+```
+
+第三步，将原始 pipeline 输出转换为公开 demo 的同一套数据分片：
+
+```powershell
+& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\build_shanghai_open_demo_data.py"
+```
