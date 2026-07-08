@@ -214,6 +214,7 @@ def build_processed_payload(city: str, date: str, nodes: pl.DataFrame, segments:
                 "mc": 1,
                 "sr": int(row["has_scenereco"] or 0),
                 "pn": row["scenereco_p_names"] or "",
+                "se": int(row.get("station_evidence_code") or 0),
                 "qc": source_mask_label(row["source_mask"]),
                 "city": info.get("abbr", ""),
                 "h9": row["h3_9"],
