@@ -1,6 +1,6 @@
 # 多源手机 SDK 定位数据融合与日内 OD 清洗-聚合框架
 
-[English](README_en.md) | [在线 Demo / Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/)
+[English](README_en.md) | [在线 Demo / Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/) | [上海验证 / Shanghai validation](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
 
 本仓库是 **Mobility Fusion** 的公开展示版本，用于说明 PioneerData 多源手机 SDK 原始事件如何被标准化、融合、审计，并构造为可解释的用户日内 `FULL_OD` 链。公开仓库仅包含框架说明、抽样 demo 数据和浏览器，不包含全量原始数据与私有生产配置。
 
@@ -12,12 +12,16 @@
 
 Demo 地址：[https://yecao02.github.io/Mobility-fusion-open/demo/](https://yecao02.github.io/Mobility-fusion-open/demo/)
 
+上海 residence 原始数据验证页：[https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
+
 Demo 支持按城市加载样本，并同时显示两类数据：
 
 - `processed`：生产管线输出的 `FULL_OD` H3 节点和 OD 段。
 - `raw`：同一批 uuid-day 对应的标准化原始事件，用于审计哪些点被捕获、吸收、压制或剔除。
 
 样本规模为大湾区内地九市每城随机抽取约 1000 个 uuid-day，共 9000 个 uuid-day。为避免单文件过大，数据按城市和日期分片保存。
+
+上海验证页使用 `S:\GEO BIG data\Shanghai-2026` 下 2026-05-01 至 2026-05-14 的 `residence_*` 原始压缩文件。每天按文件内 UUID 首次出现顺序抽取 100 个 uuid-day：第 1 天取第 1-100 个，第 2 天取第 201-300 个，以此类推。页面展示多源点位、跨源重叠冲突、短时大位移、高速跳跃、长时长与越界点等质量信号。
 
 ## 数据口径
 
@@ -56,12 +60,14 @@ SceneReco > WiFiConnect > WiFiStable > Timing
 |   `-- demo_preview.png
 |-- demo/
 |   |-- index.html
+|   |-- shanghai-validation/
 |   `-- data/
 |       |-- manifest.json
 |       |-- processed/
 |       `-- raw/
 `-- scripts/
-    `-- build_open_demo_data.py
+    |-- build_open_demo_data.py
+    `-- build_shanghai_validation.py
 ```
 
 ## 重新生成公开 Demo 数据
@@ -81,3 +87,13 @@ S:\GEO BIG data\Greater Bay Area data_operators 500G\mobility_fusion_production_
 ```
 
 脚本使用 Polars 按城市和日期分块读取 Parquet，避免一次性加载全量事件到内存。
+
+## 重新生成上海验证页数据
+
+```powershell
+& "E:\ANACONDA\envs\GEO\python.exe" "./scripts/build_shanghai_validation.py" `
+  --out "./demo/shanghai-validation/data/validation.json" `
+  --threads 24
+```
+
+脚本会自动发现并去重 `residence_Timing / residence_WifiConnect / residence_WifiStable / residence_SceneReco` 文件，适配本次上海原始压缩包的命名格式。
