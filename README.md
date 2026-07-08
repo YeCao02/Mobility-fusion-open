@@ -19,7 +19,7 @@ Demo 支持按城市和日期加载样本，并同时显示两类数据：
 - `processed`：原始 `mobility-fusion` 生产流程输出的 `FULL_OD` H3 节点和 OD 段。
 - `raw`：同一批 uuid-day 对应的标准化原始事件，用于审计哪些点被捕获、吸收、压制或剔除。
 
-大湾区样本为内地九市每城约 1000 个 uuid-day，共 9000 个 uuid-day。上海页面不是单独的质量验证逻辑，而是先从 `S:\GEO BIG data\Shanghai-2026` 的 `residence_*` 压缩原始文件中按天抽样，再改写为原始 `mobility-fusion` pipeline 的 `unified_points` 输入格式，最后使用同一套 `FULL_OD` 生产流程计算并转换为本 demo 的 `manifest + processed/raw` 分片格式。
+大湾区样本为内地九市每城约 1000 个 uuid-day，共 9000 个 uuid-day。上海页面不是单独的质量验证逻辑，而是先从 `S:\GEO BIG data\Shanghai-2026` 的 `residence_*` 压缩原始文件中按天抽样，并用同目录 `poi_info` 将 SceneReco 的 `p_id` 补回 `p_name`，再改写为原始 `mobility-fusion` pipeline 的 `unified_points` 输入格式，最后使用同一套 `FULL_OD` 生产流程计算并转换为本 demo 的 `manifest + processed/raw` 分片格式。
 
 上海样本范围为 2026-05-01 至 2026-05-14。每天按 `WifiStable` 文件内 UUID 首次出现顺序抽取 100 个 uuid-day：第 1 天取第 1-100 个，第 2 天取第 201-300 个，以此类推；同时过滤掉 2026-05-15 00:00:00 及之后的事件。
 

@@ -29,6 +29,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--raw-root", type=Path, default=DEFAULT_RAW_ROOT)
     parser.add_argument("--out-root", type=Path, default=DEFAULT_OUT_ROOT)
+    parser.add_argument(
+        "--poi-info",
+        type=Path,
+        default=None,
+        help="Optional Shanghai poi_info csv.gz used to map SceneReco p_id to p_name. Defaults to *poi_info*.csv.gz under raw-root.",
+    )
     parser.add_argument("--dates", nargs="*", default=[f"2026-05-{day:02d}" for day in range(1, 15)])
     parser.add_argument("--sample-source", default="WifiStable")
     parser.add_argument("--sample-size", type=int, default=100)
@@ -96,6 +102,36 @@ def batched_reader(path: Path, columns: list[str], batch_size: int, threads: int
     )
 
 
+def resolve_poi_info(raw_root: Path, explicit: Path | None) -> Path | None:
+    if explicit:
+        return explicit if explicit.exists() else None
+    candidates = sorted(raw_root.glob("*poi_info*.csv.gz"))
+    return candidates[0] if candidates else None
+
+
+def load_poi_names(path: Path | None) -> pl.DataFrame:
+    if path is None:
+        print("[poi] no poi_info csv.gz found; SceneReco p_name will be empty", flush=True)
+        return pl.DataFrame(schema={"p_id": pl.Utf8, "p_name": pl.Utf8})
+    df = (
+        pl.scan_csv(
+            path,
+            schema_overrides={"p_id": pl.Utf8, "poi_name": pl.Utf8},
+            infer_schema_length=0,
+        )
+        .select(
+            pl.col("p_id").cast(pl.Utf8).str.strip_chars(),
+            pl.col("poi_name").cast(pl.Utf8).str.strip_chars().alias("p_name"),
+        )
+        .filter(pl.col("p_id").is_not_null() & (pl.col("p_id") != ""))
+        .unique(subset=["p_id"], keep="first")
+        .collect()
+    )
+    named = df.filter(pl.col("p_name").is_not_null() & (pl.col("p_name") != "")).height
+    print(f"[poi] loaded {df.height:,} p_id names ({named:,} non-empty) from {path}", flush=True)
+    return df
+
+
 def collect_ranked_uuids(path: Path, end_rank: int, batch_size: int, batches_per_read: int, threads: int) -> list[str]:
     seen: set[str] = set()
     ordered: list[str] = []
@@ -138,7 +174,7 @@ def sample_uuids_for_dates(
     return samples
 
 
-def normalize_batch(batch: pl.DataFrame, source: str, date: str, cutoff: datetime | None) -> pl.DataFrame:
+def normalize_batch(batch: pl.DataFrame, source: str, date: str, poi_names: pl.DataFrame, cutoff: datetime | None) -> pl.DataFrame:
     out = (
         batch.lazy()
         .with_columns(
@@ -146,10 +182,12 @@ def normalize_batch(batch: pl.DataFrame, source: str, date: str, cutoff: datetim
             date=pl.lit(date),
             lon=pl.col("longitude").cast(pl.Float64, strict=False),
             lat=pl.col("latitude").cast(pl.Float64, strict=False),
-            p_name=pl.lit(""),
+            p_id=pl.col("p_id").cast(pl.Utf8).str.strip_chars(),
             start_dt=pl.col("start_time").str.strptime(pl.Datetime, format=TIME_FORMAT, strict=False),
             end_dt=pl.col("end_time").str.strptime(pl.Datetime, format=TIME_FORMAT, strict=False),
         )
+        .join(poi_names.lazy(), on="p_id", how="left")
+        .with_columns(pl.col("p_name").fill_null(""))
         .filter(pl.col("uuid").is_not_null() & pl.col("start_dt").is_not_null() & pl.col("end_dt").is_not_null())
         .select(["uuid", "date", "point_source", "lon", "lat", "p_id", "p_name", "start_time", "end_time"])
         .collect()
@@ -174,6 +212,7 @@ def read_source_events(
     batches_per_read: int,
     threads: int,
     assume_sorted: bool,
+    poi_names: pl.DataFrame,
     cutoff: datetime | None,
 ) -> pl.DataFrame:
     columns = ["uuid", "longitude", "latitude", "p_id", "fix_ap_ratio", "start_time", "end_time"]
@@ -193,7 +232,7 @@ def read_source_events(
             rows_seen += batch.height
             filtered = batch.filter(pl.col("uuid").is_in(uuid_series.implode()))
             if filtered.height:
-                parts.append(normalize_batch(filtered, source, date, cutoff))
+                parts.append(normalize_batch(filtered, source, date, poi_names, cutoff))
             if assume_sorted:
                 last_uuid = batch["uuid"].drop_nulls().tail(1)
                 if len(last_uuid) and str(last_uuid.item()) > max_uuid:
@@ -240,6 +279,7 @@ def main() -> None:
     if missing:
         raise FileNotFoundError(f"Missing residence files for dates: {missing}")
     args.out_root.mkdir(parents=True, exist_ok=True)
+    poi_names = load_poi_names(resolve_poi_info(args.raw_root, args.poi_info))
 
     samples = sample_uuids_for_dates(
         files,
@@ -287,6 +327,7 @@ def main() -> None:
                     args.batches_per_read,
                     args.threads,
                     not args.no_assume_sorted,
+                    poi_names,
                     cutoff,
                 )
             )
@@ -299,6 +340,11 @@ def main() -> None:
                 "sample_uuid_count": len(samples[date]),
                 "row_count": date_df.height,
                 "source_counts": date_df.group_by("point_source").len().to_dicts() if not date_df.is_empty() else [],
+                "scenereco_named_rows": (
+                    date_df.filter((pl.col("point_source") == "SceneReco") & (pl.col("p_name").str.strip_chars() != "")).height
+                    if not date_df.is_empty()
+                    else 0
+                ),
             }
         )
         print(f"[write] {date}: rows={date_df.height:,} file={out_file}", flush=True)
