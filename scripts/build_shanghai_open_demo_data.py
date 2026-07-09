@@ -87,7 +87,7 @@ def main() -> None:
             "production_root": str(args.production_root),
             "chain_mode": "FULL_OD",
             "city": "Shanghai",
-            "sample": "100 UUIDs per date, ranks 1-100, 201-300, ... from WifiStable first-appearance order.",
+            "sample": "300 UUIDs per date, ranks 1-300, 601-900, ... from WifiStable first-appearance order.",
         },
         "cities": {"sh": {"name": "Shanghai", "files": []}},
     }
