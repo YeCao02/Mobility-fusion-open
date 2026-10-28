@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mobility Fusion pipeline 更新与两地交付说明</title><style>html{scroll-behavior:smooth}body{margin:0;background:#f3f5f7;color:#213140;font:16px/1.72 system-ui,-apple-system,'Segoe UI','Microsoft YaHei',sans-serif}main{max-width:1180px;margin:42px auto;background:#fff;border:1px solid #dce3e9;border-radius:16px;padding:42px 52px;box-shadow:0 10px 38px #16324f0b}h1{font-size:31px;line-height:1.35;color:#12324b}h2{font-size:23px;color:#153f5b;border-bottom:2px solid #cbdce6;padding-bottom:9px;margin-top:40px}h3{color:#24546b}p,li{max-width:1050px}a{color:#08758f;text-decoration-thickness:1px;text-underline-offset:3px}code{font:13px/1.5 Consolas,monospace;background:#edf2f5;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:#edf2f5;padding:15px;overflow:auto;border-radius:6px}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.65;margin:22px 0}th{background:#153f5b;color:white;text-align:left}th,td{padding:12px 14px;border:1px solid #d4dfe5;vertical-align:top}tr:nth-child(even) td{background:#f4f8fa}strong{color:#173f55}blockquote{border-left:4px solid #1f8396;background:#edf6f8;padding:10px 20px;margin-left:0}.meta{padding:16px 20px;background:#fff5db;color:#6e5014;border-radius:8px;font-size:14px}footer{font-size:13px;color:#607584;border-top:1px solid #dce3e9;margin-top:30px;padding-top:20px}@media(max-width:750px){main{margin:10px;padding:23px 18px;border-radius:8px}h1{font-size:25px}table{display:block;overflow-x:auto;font-size:13px}th,td{min-width:170px;padding:10px}}@media print{body{background:white}main{border:0;box-shadow:none;margin:0;padding:0}table{font-size:10px}h2{break-after:avoid}tr{break-inside:avoid}a{color:inherit}footer{font-size:10px}}</style></head><body><main><h1>手机定位数据 pipeline 更新与全量成果汇总</h1>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mobility Fusion Pipeline 汇总</title><style>body{max-width:1100px;margin:36px auto;padding:20px;font:17px/1.8 system-ui,"Microsoft YaHei",sans-serif;color:#263c4b}h1,h2{color:#125d80}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #d4e1e7;padding:10px}a{color:#146c9c}img{max-width:100%}</style><body><h1>手机定位数据 pipeline 更新与全量成果汇总</h1>
 <p>更新日期：2026年10月28日。本文为公开汇总，详细内部技术报告另存本地。</p>
 <h2>轨迹生成算法</h2>
 <p>本轮统一事件时间与空间表达，处理区间、间隙、重叠与节点关系，输出可关联的七类表。将分析日归属与跨日所需上下文区分，按完整标识处理其可用日期上下文，避免机械拆日丢失边界；不表示每人每天均有观测。逐字段、关系和往返还原检查用于保持工程优化前后的结果一致。</p>
@@ -75,7 +75,7 @@
 <p>上海轨迹合计24,180,799,914 B（24.181 GB）。大湾区为内地九市2024-12-24、12-29两日，上海为2026-05-01至14日；日期覆盖不同，不直接比较活动强弱。上海标准化物理行数与分析日展开行数口径不同，不相减当作遗漏。</p>
 <h2>迁移与清理结果</h2>
 <p>上海标准化302文件已迁入上述G盘目录，源与目的全文件内容校验一致，190份Parquet行数检查通过；原位置及新位置均有说明。没有重复坐标转换或重算轨迹。</p>
-<p>可清理项目合计270,769,899,383逻辑字节已进入Windows回收站，可恢复；正式结果及唯一审计材料保留。回收站仍占磁盘，且部分内容共享硬链接，不能将逻辑合计当作已释放空间。未清空回收站。</p>
+<p>可清理项目合计270,769,899,383逻辑字节曾移入Windows回收站；后续复核确认本次载荷与元数据目前已不存在，不能再保证恢复。J盘可用空间从483,037,855,744增至746,897,985,536字节，净增263,860,129,792字节（263.86GB）。清理量含共享硬链接，且期间有其他磁盘活动，不能把逻辑总量当作精确物理释放；现有日志未能确定清空动作或执行者。正式结果、G盘标准化及唯一审计材料复核保持一致。</p>
 <h2>十城公开演示</h2>
 <p><a href="https://yecao02.github.io/Mobility-fusion-open/demo/">大湾区演示</a> · <a href="https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/">上海演示</a></p>
 <p>广州、深圳、珠海、佛山、江门、肇庆、惠州、东莞、中山及上海，每城固定2,000个不同标识，共20,000个。大湾区保留两日，上海采用residence并保留14日槽，无观测日期明确为空。样本取自已完成结果，无新增轨迹计算；便利抽样不代表城市人口或居住地分布。</p>
@@ -84,4 +84,4 @@
 <p>地图已更换为无需API key的OpenStreetMap在线底图，并保留署名，不批量预取；遵守<a href="https://operations.osmfoundation.org/policies/tiles/">瓦片政策</a>与<a href="https://www.openstreetmap.org/copyright">版权说明</a>。</p>
 <h2>验证范围</h2>
 <p>本地实际浏览器已检查城市、日期、分页、播放暂停及空例，两页地图瓦片正常显示。Chrome/Edge本地上海请求曾有空响应，环境负结果保留，不能把其他浏览器通过当作所有环境通过。公开HTTPS发布与回读由独立发布回执确认；本地检查不冒充线上验收。公开附件只保汇总计数、安全QA和授权数据位置大小。</p>
-<footer>文档为离线可读静态HTML，无外部脚本、字体或跟踪请求。数据口径以正文所列最终验收和来源证据为准。</footer></main></body></html>
+</body></html>
