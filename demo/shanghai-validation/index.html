@@ -30,6 +30,7 @@
     .badge.cross { background: #e94560; color: #fff; }
     .badge.hs { background: #f1c40f; color: #111; }
     #main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .basemap-muted { filter: grayscale(1) contrast(.72) brightness(1.13); }
     #map { flex: 1; min-height: 0; position: relative; background: #060912; }
     #panel { height: 280px; flex-shrink: 0; overflow: auto; background: #141d38; border-top: 2px solid #e94560; padding: 10px; }
     #panel h2 { margin: 0 0 8px; color: #ff5f78; font-size: 14px; }
@@ -131,8 +132,15 @@
   </main>
   <script>
     const map = L.map("map", {preferCanvas: true}).setView([23.15, 113.35], 9);
-    const baseTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxNativeZoom: 19, maxZoom: 20}).addTo(map);
-    L.control.layers({"OpenStreetMap (no API key)": baseTiles}, null, {position:"bottomright"}).addTo(map);
+    // Keep the visual treatment in its own tile pane: trajectory colors are unchanged.
+    map.createPane("mutedBase");
+    map.getPane("mutedBase").classList.add("basemap-muted");
+    map.getPane("mutedBase").style.zIndex = "200";
+    map.getPane("mutedBase").style.pointerEvents = "none";
+    const tileOptions = {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxNativeZoom: 19, maxZoom: 20};
+    const mutedTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {...tileOptions, pane:"mutedBase"}).addTo(map);
+    const colorTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", tileOptions);
+    L.control.layers({"浅灰底图 · Gray": mutedTiles, "彩色底图 · Color": colorTiles}, null, {position:"bottomright", collapsed:false}).addTo(map);
     let manifest = null;
     let DATA = {stats:{}, uuid_summary:[], uuid_data:{}, hex:{}};
     let currentCity = "";
