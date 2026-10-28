@@ -1,15 +1,39 @@
-# Mobility Fusion: frozen-v8 public replay
+# Multi-source Mobile SDK Location Fusion and Daily OD Reconstruction
 
-[中文](README.md) · [GBA replay](https://yecao02.github.io/Mobility-fusion-open/demo/) · [Shanghai replay](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/) · [Pipeline report](https://yecao02.github.io/Mobility-fusion-open/docs/pipeline-20261028/REPORT.html)
+[简体中文](README.md) · [Greater Bay Area demo](https://yecao02.github.io/Mobility-fusion-open/demo/) · [Shanghai demo](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
 
-The refresh extracts existing accepted frozen-v8 trajectories: **2,000 unique identities per city** for the nine mainland GBA cities (18,000 total), and 2,000 fixed Shanghai residence identities. No trajectory inference is rerun. GBA covers only the delivered 2024-12-24 and 2024-12-29; Shanghai covers available observations within 2026-05-01–14. These are different periods, not a matched population comparison.
+Mobility Fusion combines heterogeneous mobile location observations into interpretable activity nodes and ordered daily OD chains. Explore the algorithm and compare its identified results with the original observations in the Greater Bay Area and Shanghai demos.
 
-The two replays retain all available selected-user context and load one 200-ID date/page shard at a time. Empty date slots remain explicitly empty; they are not fabricated observations. This replaces the previous user-day samples with fixed cross-date identities.
+## Algorithm framework
 
-The basemap now uses standard no-key OpenStreetMap raster tiles, with visible contributor attribution and normal browser caching. No bulk prefetch is implemented. See the [official tile policy](https://operations.osmfoundation.org/policies/tiles/) and [copyright](https://www.openstreetmap.org/copyright).
+![Multi-source evidence fusion and daily OD framework](assets/figures/full_od_strategy_framework_public_en.png)
 
-Fresh keyed pseudonyms replace source UUIDs. The private key and linkage stay outside this repository; POI names are withheld. Location and time are still visible for method demonstration, so pseudonymization is not an anonymity guarantee. The browser format is a reduced display projection, not the lossless seven-table archive.
+### From observations to activity chains
 
-Raw K/S/D labels are display proxies: matching the shown primary H3/time envelope, not matched, or an explicit input quality flag. They do not reproduce the engine's complete private audit lineage. Sample-city assignment uses the earliest available DAY_START representative H3 and an existing GBA lookup, not home city. Unknown administrative cells remain unknown; cross-city is null unless both endpoints are known. The sample is a deterministic candidate-partition convenience sample, not a population-representative draw.
+- **Four evidence streams:** SceneReco (place semantics), WiFiConnect (connection locations), WiFiStable (stable presence) and Timing (locations during movement).
+- **Interpretable fusion:** align time and space, resolve competing evidence using source priority, temporal support and context, and retain supporting members.
+- **Trajectory consistency:** aggregate H3 cells over time, absorb nearby evidence, repair boundaries and check temporal order and movement plausibility.
+- **Daily chains:** `DAY_START → STAY / STOP → … → DAY_END`; adjacent nodes form OD links, with semantics and audit information stored separately.
 
-See [method and field scope](docs/demo-refresh-20261028/METHOD.md), [validation receipt](docs/demo-refresh-20261028/PUBLIC_DATA_VALIDATION.json), and the Chinese README for exact row counts/build bindings. Current manifests are `demo/data/manifest_v8.json` and `demo/shanghai-validation/data/manifest_v8.json`. Old sample payloads are retained in Git history, while old builder scripts are historical references.
+The default source priority is **SceneReco > WiFiConnect > WiFiStable > Timing**. The current pipeline improves direct-conflict arbitration, cross-day context, execution scheduling and exact storage.
+
+## Explore identified results
+
+[![Interactive demo preview](assets/figures/demo_preview.png)](https://yecao02.github.io/Mobility-fusion-open/demo/)
+
+**[Open Greater Bay Area demo →](https://yecao02.github.io/Mobility-fusion-open/demo/)**　**[Open Shanghai demo →](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)**
+
+Choose a city, date and sample to inspect observations, identified nodes, OD links and the timeline. Use playback and toggle the original observations. Both demos now use samples from completed full-scale results. The default basemap is light gray, with an original-color option.
+
+## Complete current pipeline
+
+![Inputs, evidence fusion, daily chains, execution and storage](assets/figures/mobility_fusion_pipeline_v8_zh.svg)
+
+[Open the large diagram (Chinese)](assets/figures/mobility_fusion_pipeline_v8_zh.svg) · [Pipeline overview](docs/pipeline-overview.md)
+
+## Repository guide
+
+- `demo/`: Greater Bay Area interactive demo.
+- `demo/shanghai-validation/`: Shanghai interactive demo.
+- `assets/figures/`: bilingual algorithm frameworks, preview and pipeline diagram.
+- `docs/`: methods and implementation notes.

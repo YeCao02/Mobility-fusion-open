@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="2740" viewBox="0 0 3000 2740" role="img" aria-labelledby="title desc">
+<title id="title">Mobility Fusion：多源定位融合、完整日链与可恢复生产</title>
+<desc id="desc">五层流程：统一事件，证据融合，日链与七表，计算优化，存储验收与应用。科学处理与执行控制分层展示。</desc>
+<rect width="3000" height="2740" fill="white"/>
+<text x="65" y="38" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="62" font-weight="700" fill="#105d87">Mobility Fusion｜多源定位证据融合与完整日内 OD 链</text>
+<text x="70" y="125" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="400" fill="#4c6b7d">从异质手机事件到可解释节点、连续连线、精确存储与可恢复全量生产</text>
+<rect x="55" y="205" width="2890" height="365" rx="16" fill="#eef7fc" stroke="#176f9d" stroke-width="2"/>
+<text x="85" y="225" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="43" font-weight="700" fill="#176f9d">01  统一输入与时空表达</text>
+<text x="85" y="285" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#516d7b">输入合同确定字段、时间和坐标含义；标准化只做一次，保留来源与质量信息。</text>
+<rect x="90" y="335" width="850" height="192" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="114" y="355" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#116e9b">四类互补观测</text>
+<text x="114" y="413" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">SceneReco  场景与地点语义  /  WiFiConnect  连接证据</text>
+<text x="114" y="461" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">WiFiStable  稳定驻留证据  /  Timing  移动过程位置</text>
+<path d="M955 430 L1015 430" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1015,430 995,419 995,441" fill="#46768c"/>
+<rect x="1030" y="335" width="865" height="192" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1054" y="355" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#116e9b">标准化事件</text>
+<text x="1054" y="413" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">统一字段与 UTC+8 毫秒时间；校验坐标状态</text>
+<text x="1054" y="461" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">保留有效记录、显式隔离项与来源质量</text>
+<path d="M1910 430 L1970 430" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1970,430 1950,419 1950,441" fill="#46768c"/>
+<rect x="1985" y="335" width="920" height="192" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="2009" y="355" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#116e9b">空间索引与完整身份上下文</text>
+<text x="2009" y="413" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">H3 res10：事件与节点；res9：父级聚合索引</text>
+<text x="2009" y="461" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">按 UUID 不交叠分区；保留可用跨日上下文</text>
+<path d="M1500 578 L1500 610" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1500,610 1489,590 1511,590" fill="#46768c"/>
+<rect x="55" y="620" width="2890" height="565" rx="16" fill="#fff5ec" stroke="#bd5c18" stroke-width="2"/>
+<text x="85" y="640" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="43" font-weight="700" fill="#bd5c18">02  可解释证据融合与轨迹一致性</text>
+<text x="85" y="700" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#516d7b">默认来源优先级：SceneReco ＞ WiFiConnect ＞ WiFiStable ＞ Timing；结合持续支持与时空上下文裁决。</text>
+<rect x="90" y="775" width="670" height="270" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="114" y="795" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="35" font-weight="700" fill="#a45117">局部可靠性增强</text>
+<text x="114" y="853" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">识别重叠、漂移与冲突候选</text>
+<text x="114" y="901" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">保留实际成员格与时间片支持</text>
+<text x="114" y="949" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">形成可追溯的活动候选</text>
+<path d="M768 910 L795 910" stroke="#b46a34" stroke-width="5" fill="none"/><polygon points="795,910 775,899 775,921" fill="#b46a34"/>
+<rect x="805" y="775" width="670" height="270" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="829" y="795" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="35" font-weight="700" fill="#a45117">直接冲突裁决</text>
+<text x="829" y="853" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">按来源、评分与上下文选赢家</text>
+<text x="829" y="901" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">仅直接冲突才具备删除资格</text>
+<text x="829" y="949" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">避免传递连通造成连带误删</text>
+<path d="M1483 910 L1510 910" stroke="#b46a34" stroke-width="5" fill="none"/><polygon points="1510,910 1490,899 1490,921" fill="#b46a34"/>
+<rect x="1520" y="775" width="670" height="270" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1544" y="795" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="35" font-weight="700" fill="#a45117">H3 时空聚合</text>
+<text x="1544" y="853" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">相邻格吸收与短时抖动处理</text>
+<text x="1544" y="901" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">恢复边界与碎片，联合选时</text>
+<text x="1544" y="949" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">保留聚合成员的证据支持</text>
+<path d="M2198 910 L2225 910" stroke="#b46a34" stroke-width="5" fill="none"/><polygon points="2225,910 2205,899 2205,921" fill="#b46a34"/>
+<rect x="2235" y="775" width="670" height="270" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="2259" y="795" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="35" font-weight="700" fill="#a45117">全链一致性闭环</text>
+<text x="2259" y="853" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">检查顺序、间隙与时间重叠</text>
+<text x="2259" y="901" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">考虑速度不确定性与可达性</text>
+<text x="2259" y="949" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">区分局部边界许可与未决项</text>
+<rect x="90" y="1070" width="2815" height="76" rx="16" fill="#fffaf5" stroke="#e4b991" stroke-width="2"/>
+<text x="117" y="1085" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="32" font-weight="700" fill="#97521f">裁决结果：保留节点 · 合并吸收 · 异常剪枝 · 质量标记　｜　语义事实与物理活动链分开表达</text>
+<path d="M1500 1193 L1500 1225" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1500,1225 1489,1205 1511,1205" fill="#46768c"/>
+<rect x="55" y="1235" width="2890" height="495" rx="16" fill="#f0f8ef" stroke="#377f3c" stroke-width="2"/>
+<text x="85" y="1255" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="43" font-weight="700" fill="#377f3c">03  构造完整日链与七类结果表</text>
+<text x="85" y="1315" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#516d7b">按可用观测构造有序节点及相邻 OD；不补造缺失日期，也不将节点连线当作道路导航轨迹。</text>
+<rect x="90" y="1380" width="1230" height="275" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="114" y="1400" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#116e9b">物理日链：节点与相邻 OD</text>
+<text x="114" y="1458" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">DAY_START  →  STAY / STOP  →  …  →  DAY_END</text>
+<text x="114" y="1506" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">相邻节点按时间顺序连接；保留重复到访</text>
+<text x="114" y="1554" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">节点时间、证据包络、物理有效性与分析许可分开</text>
+<path d="M1340 1510 L1415 1510" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1415,1510 1395,1499 1395,1521" fill="#46768c"/>
+<rect x="1435" y="1380" width="1470" height="275" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1459" y="1400" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#116e9b">七表联合输出</text>
+<text x="1459" y="1458" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">nodes · segments：节点、时间和相邻连线</text>
+<text x="1459" y="1506" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">semantic_facts · semantic_links · semantic_conflicts：语义及关系</text>
+<text x="1459" y="1554" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">boundary_audit · source_quality_audit：边界和来源审计</text>
+<path d="M1500 1738 L1500 1770" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1500,1770 1489,1750 1511,1750" fill="#46768c"/>
+<rect x="55" y="1780" width="2890" height="365" rx="16" fill="#f5f2fa" stroke="#655596" stroke-width="2"/>
+<text x="85" y="1800" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="43" font-weight="700" fill="#655596">04  在保持科学结果的前提下扩展计算</text>
+<text x="85" y="1860" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#516d7b">执行并发与科学计划分离：完整用户不拆丢，已成功提交的分区恢复后复用。</text>
+<rect x="90" y="1920" width="875" height="180" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="114" y="1940" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#655596">列式读取与原生热点</text>
+<text x="114" y="1998" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">Arrow 批量访问、复用已解码内容</text>
+<text x="114" y="2046" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">精确有界配对，原生构链热点</text>
+<rect x="1015" y="1920" width="875" height="180" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1039" y="1940" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#655596">按真实资源动态派发</text>
+<text x="1039" y="1998" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">监测提交额度、物理内存和磁盘</text>
+<text x="1039" y="2046" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">迟滞降并发、独立保护与进程回收</text>
+<rect x="1940" y="1920" width="965" height="180" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1964" y="1940" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#655596">断点与有界恢复</text>
+<text x="1964" y="1998" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">任务完成前精确回读与关系校验</text>
+<text x="1964" y="2046" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">成功 COMMIT 复用；仅未提交部分重做</text>
+<path d="M1500 2153 L1500 2185" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1500,2185 1489,2165 1511,2165" fill="#46768c"/>
+<rect x="55" y="2195" width="2890" height="395" rx="16" fill="#eef8f7" stroke="#087f80" stroke-width="2"/>
+<text x="85" y="2215" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="43" font-weight="700" fill="#087f80">05  精确存储、严格发布与研究消费</text>
+<text x="85" y="2275" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#516d7b">Parquet 保存唯一载荷，字典 / schema / catalog / reader 共同定义完整可查询包。</text>
+<rect x="90" y="2340" width="880" height="194" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="114" y="2360" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#087f80">减少重复存储，保持精确还原</text>
+<text x="114" y="2418" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">类型化区间、字典、引用及残差编码</text>
+<text x="114" y="2466" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">保留位值、NULL、字段语义与表间关系</text>
+<path d="M985 2430 L1030 2430" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1030,2430 1010,2419 1010,2441" fill="#46768c"/>
+<rect x="1045" y="2340" width="880" height="194" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="1069" y="2360" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#087f80">逐分区提交与全包验收</text>
+<text x="1069" y="2418" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">prepared → COMMIT → COMPLETE</text>
+<text x="1069" y="2466" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">完整载荷 SHA / 精确回读 → CURRENT 发布</text>
+<path d="M1940 2430 L1985 2430" stroke="#46768c" stroke-width="5" fill="none"/><polygon points="1985,2430 1965,2419 1965,2441" fill="#46768c"/>
+<rect x="2000" y="2340" width="905" height="194" rx="16" fill="white" stroke="#c7d9e2" stroke-width="2"/>
+<text x="2024" y="2360" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="33" font-weight="700" fill="#087f80">查询、分析与互动演示</text>
+<text x="2024" y="2418" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">DuckDB / reader：按需查询七表</text>
+<text x="2024" y="2466" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="29" font-weight="400" fill="#233e50">时空与活动分析；原始观测—识别结果回放</text>
+<text x="75" y="2630" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="34" font-weight="700" fill="#1e5e74">可解释：裁决有据可查     连续：保留可用跨日上下文     可扩展：分区与资源控制     可复核：精确回读与原子发布</text>
+<text x="75" y="2690" dominant-baseline="text-before-edge" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="25" font-weight="400" fill="#617b89">算法与工程框架｜2026-10-28｜箭头表示数据流；第 04 层为执行支撑。性能收益依据独立对照，不由并发数推断。</text>
+</svg>

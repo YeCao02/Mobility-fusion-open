@@ -1,32 +1,39 @@
-# Mobility Fusion 公开演示：冻结 v8 存量轨迹
+# 多源手机 SDK 定位融合与日内 OD 清洗–聚合框架
 
-[English](README_en.md) · [大湾区演示](https://yecao02.github.io/Mobility-fusion-open/demo/) · [上海演示](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/) · [Pipeline 演进与存储说明](https://yecao02.github.io/Mobility-fusion-open/docs/pipeline-20261028/REPORT.html)
+[English](README_en.md) · [大湾区在线演示](https://yecao02.github.io/Mobility-fusion-open/demo/) · [上海在线演示](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
 
-本次演示直接从已完成并验收的全量 frozen-v8 发布包抽取，每个城市固定 **2,000 个唯一数据身份**，共九个大湾区内地城市18,000个、上海residence样本2,000个。已完成轨迹不重新构链。
+Mobility Fusion 将多源手机定位观测融合为可解释的活动节点与完整日内 OD 链。这里展示算法框架，以及大湾区、上海数据的识别结果，可直接对照原始观测查看处理效果。
 
-| 演示 | 城市 | 实际交付日期 | 唯一用户样本 | 数据投影 |
-|---|---|---|---:|---|
-| 大湾区 | 广州、深圳、珠海、佛山、江门、肇庆、惠州、东莞、中山 | 2024-12-24、2024-12-29 | 每城2,000，总18,000 | 2,250,737 raw行、213,433节点、183,366线段 |
-| 上海 | 上海residence cohort | 2026-05-01至2026-05-14 | 固定2,000 | 2,313,740 raw日视图行、201,335节点、177,843线段 |
+## 算法框架
 
-两地时间不同，不是同期人口对比。每个样本保留交付日期范围内**全部可用用户上下文**；缺观测的样本日期显示空槽位，不补造观测。页面按城市、日期和200个样本ID分页，仅获取当前页的一对processed/raw gzip分片；切换日期可追踪同一本次伪名。新口径是固定跨日用户，取代旧GBA每城约1,000个uuid-day和旧上海每日300个不同uuid-day的展示口径。
+![多源定位证据融合与完整日链](assets/figures/full_od_strategy_framework_public_zh.png)
 
-## 地图底图
+### 从观测到活动链
 
-采用 `https://tile.openstreetmap.org/{z}/{x}/{y}.png`，无需API key，地图保留可见的© OpenStreetMap contributors署名。使用浏览器常规缓存，不预下载或批量抓瓦片。服务可用性以OSMF政策为准：[官方瓦片政策](https://operations.osmfoundation.org/policies/tiles/)、[版权与署名](https://www.openstreetmap.org/copyright)。
+- **四类证据：** SceneReco（场景与地点语义）、WiFiConnect（连接位置）、WiFiStable（稳定驻留）、Timing（移动过程位置）。
+- **解释性融合：** 统一时空表达，按来源优先级、持续支持及上下文裁决冲突，保留可追溯的成员支持。
+- **轨迹一致性：** H3 时空聚合、邻域吸收与边界修复，结合时间顺序和运动合理性识别活动节点。
+- **完整日链：** `DAY_START → STAY / STOP → … → DAY_END`；相邻节点形成 OD，语义、边界与来源审计独立保存。
 
-## 数据解释与隐私范围
+默认来源优先级为 **SceneReco ＞ WiFiConnect ＞ WiFiStable ＞ Timing**。新版本进一步改进直接冲突裁决、跨日上下文、计算调度与精确存储。
 
-- 本次公开ID由独立私钥HMAC派生；源UUID、盐值与私有映射不发布。地点名称不公开。原坐标（按既有演示精度）和时间仍用于方法展示，**伪名不等于不可重识别保证**。
-- 节点/线段来自已验收发布包；浏览器JSON为精简可视化投影，不是七表无损存档，不替代完整字段合同。raw是与正式输入一致的标准化分析日视图，不是未处理供应商原文件。
-- `K/S/D`为展示标记：K为主H3与时间包络匹配，S为未匹配到当前展示节点，D仅引用输入显式质量标记；它们不是冻结引擎完整私有保留/剔除血缘，也不等于事实真值。
-- 样本城市按最早可用日期DAY_START代表H3映射至已有大湾区城市表；不代表居住城市或主要活动城市。节点实际行政城市独立标示，表外为未知；线段两端都已知才给true/false跨城，其余为null/待判。上海样本所属cohort不自动填充每个节点的城市。
-- 这是可复现的分区候选方便抽样，不是人口概率样本；不能以样本数作总体出行率分母。连线不是道路导航轨迹，跨城连线也不是独立验证的真实行程。
+## 查看识别结果
 
-## 来源与校验
+[![交互演示预览](assets/figures/demo_preview.png)](https://yecao02.github.io/Mobility-fusion-open/demo/)
 
-数据来自已完成验收的两地正式全量结果。导出前用包内reader校验抽中分区并解码，不复跑轨迹生成。公开数据逐身份/日期与私有选定上下文核对raw、nodes、segments行数及段端点；公开JSON扫描不含源UUID格式。
+**[打开大湾区演示 →](https://yecao02.github.io/Mobility-fusion-open/demo/)**　**[打开上海演示 →](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)**
 
-[详细抽样与投影协议](docs/demo-refresh-20261028/METHOD.md) · [公开数据校验回执](docs/demo-refresh-20261028/PUBLIC_DATA_VALIDATION.json)
+选择城市、日期与样本，查看原始观测、识别节点、OD 连线和时间轴；支持逐步播放与原始观测开关。两页已更新为全量计算成果中的样本，默认浅灰底图，可切换原彩色。
 
-`demo/data/manifest_v8.json`与`demo/shanghai-validation/data/manifest_v8.json`为当前入口。旧演示数据已从当前树替换，原版本保留Git历史。旧脚本仅供历史方法参考；本次执行器和详细输入绑定仅私有留档，公开仓库提供数据、展示页面和安全聚合验证摘要。
+## 新版完整 Pipeline
+
+![从多源输入到算法、执行、存储与应用](assets/figures/mobility_fusion_pipeline_v8_zh.svg)
+
+[打开大图](assets/figures/mobility_fusion_pipeline_v8_zh.svg) · [流程说明](docs/pipeline-overview.md)
+
+## 仓库导航
+
+- `demo/`：大湾区交互演示。
+- `demo/shanghai-validation/`：上海交互演示。
+- `assets/figures/`：中英文算法框架、预览与完整流程图。
+- `docs/`：方法与实现说明。
