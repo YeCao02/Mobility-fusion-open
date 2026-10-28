@@ -25,8 +25,8 @@
 
 ## 来源与校验
 
-大湾区源build `7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49`；上海residence源build `795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f`。导出前用包内reader校验抽中分区并解码，不复跑轨迹生成。公开数据逐身份/日期与私有选定上下文核对raw、nodes、segments行数及段端点；公开JSON扫描不含源UUID格式。
+数据来自已完成验收的两地正式全量结果。导出前用包内reader校验抽中分区并解码，不复跑轨迹生成。公开数据逐身份/日期与私有选定上下文核对raw、nodes、segments行数及段端点；公开JSON扫描不含源UUID格式。
 
 [详细抽样与投影协议](docs/demo-refresh-20261028/METHOD.md) · [公开数据校验回执](docs/demo-refresh-20261028/PUBLIC_DATA_VALIDATION.json)
 
-`demo/data/manifest_v8.json`与`demo/shanghai-validation/data/manifest_v8.json`为当前入口。旧演示数据已从当前树替换，原版本保留Git历史。旧脚本仅供历史方法参考；当前导出脚本为`scripts/build_v8_public_demo.py`，需本地私有已验收输入与身份映射环境，不包含全量数据或生产私有配置。
+`demo/data/manifest_v8.json`与`demo/shanghai-validation/data/manifest_v8.json`为当前入口。旧演示数据已从当前树替换，原版本保留Git历史。旧脚本仅供历史方法参考；本次执行器和详细输入绑定仅私有留档，公开仓库提供数据、展示页面和安全聚合验证摘要。

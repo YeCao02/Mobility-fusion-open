@@ -7,7 +7,6 @@
   "excluded_users": 1,
   "excluded_input_rows": 384587,
   "excluded_cohort": "flow",
-  "private_identity_registry_sha256": "2c999c9f23690e418f273da8a3f446adc3ecbda54714dec51e927947f3e63cc4",
   "published_packages_changed": false,
   "recompute_required": false,
   "original_data_deleted": false,

@@ -2,11 +2,6 @@
   "at": "2026-10-28T11:25:42.253684+08:00",
   "status": "passed_local_IAB_independent_UI_checks",
   "browser": "Codex in-app browser (IAB); actual DOM and screenshot, not mocked requests",
-  "html_sha256": {
-    "demo/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be",
-    "demo/shanghai-validation/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be"
-  },
-  "data_validation_sha256": "d878148e349949e3c6a822f4b4c4d67d2a261cdb37c357c923ac79770eb4dce3",
   "shanghai": {
     "initial": "SH 2000 unique users; 2026-05-01 page1;200 slots; actual nodes and OD tables",
     "last_date_page": "2026-05-14 page10;200 list cases",
@@ -43,10 +38,6 @@
   "basemap_host": "tile.openstreetmap.org",
   "visible_attribution": "Leaflet | OpenStreetMap contributors",
   "API_key_error_observed": false,
-  "screenshots": {
-    "ROOT_SH_IAB_LOCAL.png": "d0cf3cffc3833204862fa79538db158689b88ab277b65df55996f42bed86d908",
-    "ROOT_GBA_IAB_LOCAL.png": "bf4adebae9696e6760e4caa41f7b5178f7b910869a2cc3e4f7f5b594f4e93118"
-  },
   "environment_limitation": "Chrome/Edge local SH gzip fetch returned empty204 before reaching local server; standard HTTP readback200. IAB same candidate actually succeeds. No security/proxy settings changed; public HTTPS readback remains to be checked after deployment.",
   "public_https_checked": false
 }

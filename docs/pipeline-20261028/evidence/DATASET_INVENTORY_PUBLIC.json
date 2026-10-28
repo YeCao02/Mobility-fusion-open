@@ -4,12 +4,10 @@
     {
       "name": "GBA",
       "kind": "published_trajectories",
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\gba_full_v8_20261024\\builds\\7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49",
+      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\gba_full_v8_20261024 (CURRENT.json selects accepted package)",
       "current": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\gba_full_v8_20261024\\CURRENT.json",
       "files": 352675,
       "bytes": 25832872748,
-      "build_id": "7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49",
-      "complete_sha256": "0b82129ef97fc3801b3b7cc25f78195b340e74b76d80d85f8627605cb0e465fc",
       "tasks": 25180,
       "input_rows": 6289827619,
       "accepted_rows": 6289826644,
@@ -30,12 +28,10 @@
     {
       "name": "Shanghai-flow",
       "kind": "published_trajectories",
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow\\builds\\5daa8a51eeabd9b67e65b732a56775786bedd8f54e0985f690aba233549724c2",
+      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow (CURRENT.json selects accepted package)",
       "current": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow\\CURRENT.json",
       "files": 196213,
       "bytes": 6452307326,
-      "build_id": "5daa8a51eeabd9b67e65b732a56775786bedd8f54e0985f690aba233549724c2",
-      "complete_sha256": "dd76056a0199adfb4af1a8e88da9f54a6f4a50667834fa84e2cbd2e1085054e6",
       "tasks": 14014,
       "input_rows": 1529241746,
       "accepted_rows": 1528857159,
@@ -56,12 +52,10 @@
     {
       "name": "Shanghai-residence",
       "kind": "published_trajectories",
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\residence\\builds\\795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f",
+      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\residence (CURRENT.json selects accepted package)",
       "current": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\residence\\CURRENT.json",
       "files": 265288,
       "bytes": 17728492588,
-      "build_id": "795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f",
-      "complete_sha256": "76054ec3798cd4e1beda2eb71ada020ff17e14528e27892da3bd25a055b60bb2",
       "tasks": 18948,
       "input_rows": 5359827199,
       "accepted_rows": 5359827199,
@@ -89,7 +83,6 @@
       "parquet_bytes": 132041792318,
       "rows": 6289827619,
       "status": "prior_user_move_metadata_all_footer_binding_acceptance; current_inventory_matches",
-      "verification": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\standardized_g_migration_20261026\\VERIFICATION_PUBLIC.json",
       "dates": [
         "2024-12-24",
         "2024-12-29"
@@ -114,8 +107,6 @@
         "2026-05-01",
         "2026-05-14"
       ],
-      "verification": "J:\\Mobility-Computing\\phone_spatiotemporal\\work\\shanghai_closeout_20261028\\storage\\MIGRATION_VERIFICATION_PUBLIC.json",
-      "final_receipt": "J:\\Mobility-Computing\\phone_spatiotemporal\\work\\shanghai_closeout_20261028\\storage\\STORAGE_FINAL_PUBLIC.json",
       "source_payload_recycled": true
     }
   ],

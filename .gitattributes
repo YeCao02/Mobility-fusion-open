@@ -1,5 +1,4 @@
 # Preserve bytes bound by the frozen-v8 demo validation receipts.
-scripts/build_v8_public_demo.py -text
 demo/index.html -text
 demo/shanghai-validation/index.html -text
 demo/data/manifest_v8.json -text

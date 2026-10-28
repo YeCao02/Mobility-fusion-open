@@ -17,11 +17,7 @@
   "permanent_deletion": false,
   "recycle_bin_emptied": false,
   "disk_space_freed_claimed": false,
-  "current_pointer_updates": "J:\\Mobility-Computing\\phone_spatiotemporal\\work\\shanghai_closeout_20261028\\storage\\CURRENT_POINTER_UPDATES_PUBLIC.json",
-  "full_copy_sha_verification": "J:\\Mobility-Computing\\phone_spatiotemporal\\work\\shanghai_closeout_20261028\\storage\\MIGRATION_VERIFICATION_PUBLIC.json",
   "historical_frozen_bindings_rewritten": false,
   "junctions_created": false,
-  "demo_owner_confirmed_no_longer_reading_old_sources": true,
-  "G_free_after": 71718522880,
-  "J_free_after": 483037855744
+  "demo_owner_confirmed_no_longer_reading_old_sources": true
 }

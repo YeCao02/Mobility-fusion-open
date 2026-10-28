@@ -1,5 +1,4 @@
 {
   "scope": "Apply already-decided exclusion policy by selection membership only; no additional anomalous observation read or investigation",
-  "selected_excluded_identity_count": 0,
-  "exclusion_registry_sha256": "2c999c9f23690e418f273da8a3f446adc3ecbda54714dec51e927947f3e63cc4"
+  "selected_excluded_identity_count": 0
 }

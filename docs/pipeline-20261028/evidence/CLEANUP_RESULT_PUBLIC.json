@@ -1,73 +1,6 @@
 {
   "at": "2026-10-28T11:13:50.774157+08:00",
   "status": "complete",
-  "actions": [
-    {
-      "source": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026\\indexed",
-      "bytes": 51077334026,
-      "action": "windows_recycle_bin",
-      "recoverable": true
-    },
-    {
-      "source": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026\\indexed_parts_r6",
-      "bytes": 56586760346,
-      "action": "windows_recycle_bin",
-      "recoverable": true
-    },
-    {
-      "source": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow\\.staging\\7599d64ac91ce1e2bbbf9a16c4c85749ad291b95deeac660f2b75059875c01fa",
-      "bytes": 6448183274,
-      "action": "windows_recycle_bin",
-      "recoverable": true
-    },
-    {
-      "source": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_standardized_20261026\\data",
-      "bytes": 156199065249,
-      "action": "windows_recycle_bin",
-      "recoverable": true
-    },
-    {
-      "source_scope": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026\\recovery_r6",
-      "files": 16,
-      "bytes": 458556488,
-      "action": "windows_recycle_bin",
-      "reason": "SHA-identical retained copies verified"
-    }
-  ],
-  "retained": [
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow\\builds",
-      "reason": "accepted canonical flow product; all output payload and metadata retained"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\residence\\builds",
-      "reason": "accepted canonical residence product; all output payload and metadata retained"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026",
-      "reason": "code, plans, anomaly exclusion reference, logs, failed/control/resource/cost receipts and unique regression fixtures retained; only explicit caches removed"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\flow\\_work",
-      "reason": "run/attempt/failure/performance history; ~13.8MB retained"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_v8_20261026\\residence\\_work",
-      "reason": "run/attempt/failure/performance history; ~78MB retained"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026\\recovery_r6",
-      "reason": "unique or independently different fixed regression payloads retained; only 16 SHA-identical extra copies recycled"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_trajectory_20261026\\sort_scratch",
-      "reason": "empty scratch only; zero payload bytes"
-    },
-    {
-      "path": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\iteration_v8_20261021",
-      "reason": "frozen runtime/scientific dependencies outside cleanup scope; retained"
-    }
-  ],
   "recycle_logical_bytes": 270769899383,
   "known_current_package_shared_payload_bytes": 6401474735,
   "disk_space_freed_claimed": false,
@@ -76,5 +9,11 @@
   "quota_current_MiB": 350000,
   "quota_other_volumes_changed": false,
   "quota_restore_condition": "Do not reduce while recycle contents exceed old limit; before/after .reg and JSON retained",
-  "public_privacy": "No raw UUID, coordinates, recycle internal paths or system user identifiers included"
+  "recoverable": true,
+  "recycled_directory_count": 4,
+  "recycled_individual_duplicate_files": 16,
+  "recycled_source_files": 197753,
+  "formal_products_preserved": true,
+  "unique_audit_history_preserved": true,
+  "public_projection": "Aggregate cleanup totals only; detailed cache paths and source inventories remain local"
 }
