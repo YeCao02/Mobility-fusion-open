@@ -5,78 +5,78 @@
     {
       "id": "E01",
       "file": "evidence/STORAGE_FINAL_PUBLIC.json",
-      "published_copy_sha256": "db4543c59d5aea9c8ebcf8956da421c406fe966f09e1783c1169c3dcb6ce2f0b",
-      "published_bytes": 962,
+      "published_copy_sha256": "56e25aef09f6d4d1c05488932b374642b5a5720f465a0476abb34090868aa06b",
+      "published_bytes": 939,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E02",
       "file": "evidence/DATASET_INVENTORY_PUBLIC.json",
-      "published_copy_sha256": "18fe3d2ba72d83b6319bd2eb58eaf273382c2ee33b2484cc210e8d83f68525d8",
-      "published_bytes": 4588,
+      "published_copy_sha256": "29d1bc7848f0c3ec6fa9d189a97f961dceae148a29c6d1ad8f72c52d88254d31",
+      "published_bytes": 4473,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E03",
       "file": "evidence/MIGRATION_VERIFICATION_PUBLIC.json",
-      "published_copy_sha256": "7e7fd686b45b70ef5020c8bffd7143bc59d92a377f78f604b943951457e5fb0d",
-      "published_bytes": 724,
+      "published_copy_sha256": "a703add6b8d1f19597f6cddd0d95e3344fb3348f0ae722b4ac00e993d9895691",
+      "published_bytes": 706,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E04",
       "file": "evidence/CLEANUP_RESULT_PUBLIC.json",
-      "published_copy_sha256": "c582bf4722fa997a88081c4b135bcec7ebd4840227e9f2cf8295efd92f21f9bf",
-      "published_bytes": 813,
+      "published_copy_sha256": "908939425217ff09489d22791cd5ef10a91dfbe86e4699593b7b94e79cf8281e",
+      "published_bytes": 794,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E05",
       "file": "evidence/PUBLIC_DATA_VALIDATION.json",
-      "published_copy_sha256": "5a943b41bbb613aaeac3c973fd8fdc6fed28331aab92b9bbb61a74ce0077f089",
-      "published_bytes": 2551,
+      "published_copy_sha256": "4d5020bd41800d76d06a4104b18b1c66b0bfbe9b7023c2628c4a92265b027d54",
+      "published_bytes": 2462,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E06",
       "file": "evidence/ROOT_BROWSER_QA_PUBLIC.json",
-      "published_copy_sha256": "11976b75f518641fc4330e57efb68fd91f9b12dd498d45c4890869363f867761",
-      "published_bytes": 1617,
+      "published_copy_sha256": "6bfc16c9b15861ecd085e7085517e8a8de5773ee49997bd98d9762db0ebb3f14",
+      "published_bytes": 1574,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E07",
       "file": "evidence/DEMO_INDEPENDENT_REVIEW_PUBLIC.json",
-      "published_copy_sha256": "0423eaeb6a9f214eae99ebbed64c8b725fff66a191c4cf780d4321444461e98b",
-      "published_bytes": 744,
+      "published_copy_sha256": "81a0579ae8cd327e0971227b582fb8efece447ed9c5df1e2e11119851142b0c6",
+      "published_bytes": 723,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E08",
       "file": "evidence/EXCLUSION_MEMBERSHIP_PUBLIC.json",
-      "published_copy_sha256": "6dbabce165426c651abb209adb5140e76630da858b27e93b2f32f75a160369a1",
-      "published_bytes": 189,
+      "published_copy_sha256": "33b05a32312947fdea0810e13b0e172cd496992f15a3e2cc5ff7fa59269b86d0",
+      "published_bytes": 185,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E09",
       "file": "evidence/GBA_BROWSER_QA_PUBLIC.json",
-      "published_copy_sha256": "16c9f82682e95a300a0ff8a8f1220dadd60f1e32b5aaae905c54ca0075dfb6c7",
-      "published_bytes": 1584,
+      "published_copy_sha256": "e409b402893b7bc9b35af140c05a0da517b87505b1269cc753725ce8cf60cba8",
+      "published_bytes": 1502,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E10",
       "file": "evidence/BROWSER_ENVIRONMENT_NOTE_PUBLIC.json",
-      "published_copy_sha256": "b0383f215caa5258742445635e2d4e9fcc47caad068d91bcf3fa80085c55878c",
-      "published_bytes": 871,
+      "published_copy_sha256": "9e22c5ebb04973a023615cd4c7363f5bc25fcb96719f09b8a2d423a18f3a16f8",
+      "published_bytes": 862,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     },
     {
       "id": "E11",
       "file": "evidence/ANOMALY_EXCLUSION_PUBLIC.json",
-      "published_copy_sha256": "62234716f517a7a4dd9c9c99436b2c077eee53e015e8038682d47348e2533c57",
-      "published_bytes": 832,
+      "published_copy_sha256": "18d34b1ac5973584551418f3b1ed3933bfe7b6c846b4b09b255ced80542cabb6",
+      "published_bytes": 813,
       "redaction_policy": "Public aggregate projection; detailed internal cache inventories and private identity fingerprints retained locally only"
     }
   ]
