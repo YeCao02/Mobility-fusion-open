@@ -1,124 +1,32 @@
-# 多源手机 SDK 定位融合与日内 OD 清洗-聚合框架
+# Mobility Fusion 公开演示：冻结 v8 存量轨迹
 
-[English](README_en.md) | [在线 Demo / Live Demo](https://yecao02.github.io/Mobility-fusion-open/demo/) | [上海抽样回放 / Shanghai sample replay](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
+[English](README_en.md) · [大湾区演示](https://yecao02.github.io/Mobility-fusion-open/demo/) · [上海演示](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/) · [Pipeline 演进与存储说明](https://yecao02.github.io/Mobility-fusion-open/docs/pipeline-20261028/REPORT.html)
 
-本仓库是 **Mobility Fusion** 的公开展示版本，用于说明 PioneerData 多源手机 SDK 原始事件如何被标准化、融合、审计，并构造为可解释的用户日内 `FULL_OD` 链。公开仓库仅包含框架说明、抽样 demo 数据和浏览器，不包含全量原始数据与私有生产配置。
+本次演示直接从已完成并验收的全量 frozen-v8 发布包抽取，每个城市固定 **2,000 个唯一数据身份**，共九个大湾区内地城市18,000个、上海residence样本2,000个。已完成轨迹不重新构链。
 
-![framework](assets/figures/full_od_strategy_framework_public_zh.png)
+| 演示 | 城市 | 实际交付日期 | 唯一用户样本 | 数据投影 |
+|---|---|---|---:|---|
+| 大湾区 | 广州、深圳、珠海、佛山、江门、肇庆、惠州、东莞、中山 | 2024-12-24、2024-12-29 | 每城2,000，总18,000 | 2,250,737 raw行、213,433节点、183,366线段 |
+| 上海 | 上海residence cohort | 2026-05-01至2026-05-14 | 固定2,000 | 2,313,740 raw日视图行、201,335节点、177,843线段 |
 
-## 在线 Demo
+两地时间不同，不是同期人口对比。每个样本保留交付日期范围内**全部可用用户上下文**；缺观测的样本日期显示空槽位，不补造观测。页面按城市、日期和200个样本ID分页，仅获取当前页的一对processed/raw gzip分片；切换日期可追踪同一本次伪名。新口径是固定跨日用户，取代旧GBA每城约1,000个uuid-day和旧上海每日300个不同uuid-day的展示口径。
 
-[![demo preview](assets/figures/demo_preview.png)](https://yecao02.github.io/Mobility-fusion-open/demo/)
+## 地图底图
 
-大湾区 demo：[https://yecao02.github.io/Mobility-fusion-open/demo/](https://yecao02.github.io/Mobility-fusion-open/demo/)
+采用 `https://tile.openstreetmap.org/{z}/{x}/{y}.png`，无需API key，地图保留可见的© OpenStreetMap contributors署名。使用浏览器常规缓存，不预下载或批量抓瓦片。服务可用性以OSMF政策为准：[官方瓦片政策](https://operations.osmfoundation.org/policies/tiles/)、[版权与署名](https://www.openstreetmap.org/copyright)。
 
-上海抽样回放页：[https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/](https://yecao02.github.io/Mobility-fusion-open/demo/shanghai-validation/)
+## 数据解释与隐私范围
 
-Demo 支持按城市和日期加载样本，并同时显示两类数据：
+- 本次公开ID由独立私钥HMAC派生；源UUID、盐值与私有映射不发布。地点名称不公开。原坐标（按既有演示精度）和时间仍用于方法展示，**伪名不等于不可重识别保证**。
+- 节点/线段来自已验收发布包；浏览器JSON为精简可视化投影，不是七表无损存档，不替代完整字段合同。raw是与正式输入一致的标准化分析日视图，不是未处理供应商原文件。
+- `K/S/D`为展示标记：K为主H3与时间包络匹配，S为未匹配到当前展示节点，D仅引用输入显式质量标记；它们不是冻结引擎完整私有保留/剔除血缘，也不等于事实真值。
+- 样本城市按最早可用日期DAY_START代表H3映射至已有大湾区城市表；不代表居住城市或主要活动城市。节点实际行政城市独立标示，表外为未知；线段两端都已知才给true/false跨城，其余为null/待判。上海样本所属cohort不自动填充每个节点的城市。
+- 这是可复现的分区候选方便抽样，不是人口概率样本；不能以样本数作总体出行率分母。连线不是道路导航轨迹，跨城连线也不是独立验证的真实行程。
 
-- `processed`：原始 `mobility-fusion` 生产流程输出的 `FULL_OD` H3 节点和 OD 段。
-- `raw`：同一批 uuid-day 对应的标准化原始事件，用于审计哪些点被捕获、吸收、压制或剔除。
+## 来源与校验
 
-大湾区样本为内地九市每城约 1000 个 uuid-day，共 9000 个 uuid-day。上海页面不是单独的质量验证逻辑，而是先从 `S:\GEO BIG data\Shanghai-2026` 的 `residence_*` 压缩原始文件中按天抽样，并用同目录 `poi_info` 将 SceneReco 的 `p_id` 补回 `p_name`，再改写为原始 `mobility-fusion` pipeline 的 `unified_points` 输入格式，最后使用同一套 `FULL_OD` 生产流程计算并转换为本 demo 的 `manifest + processed/raw` 分片格式。
+大湾区源build `7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49`；上海residence源build `795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f`。导出前用包内reader校验抽中分区并解码，不复跑轨迹生成。公开数据逐身份/日期与私有选定上下文核对raw、nodes、segments行数及段端点；公开JSON扫描不含源UUID格式。
 
-上海样本范围为 2026-05-01 至 2026-05-14。每天按 `WifiStable` 文件内 UUID 首次出现顺序抽取 100 个 uuid-day：第 1 天取第 1-100 个，第 2 天取第 201-300 个，以此类推；同时过滤掉 2026-05-15 00:00:00 及之后的事件。
+[详细抽样与投影协议](docs/demo-refresh-20261028/METHOD.md) · [公开数据校验回执](docs/demo-refresh-20261028/PUBLIC_DATA_VALIDATION.json)
 
-## 数据口径
-
-四类输入事件：
-
-- `SceneReco`：场景识别 / POI 语义点。
-- `WiFiConnect`：Wi-Fi 连接事件。
-- `WiFiStable`：稳定 Wi-Fi 锚点事件。
-- `Timing`：蜂窝 timing / GPS 类时空点。
-
-核心融合优先级：
-
-```text
-SceneReco > WiFiConnect > WiFiStable > Timing
-```
-
-公开 demo 使用 `FULL_OD` 口径：完成原始事件标准化、H3 编码、局部支撑校验、近邻吸收、防抖、速度与上下文检查后，保留日内连续的 `DAY_START / STAY / STOP / DAY_END` 节点，并由相邻节点生成 OD 段。
-
-## Demo 状态说明
-
-浏览器中的原始点状态是公开审计标记：
-
-- `K`：标准化事件被生产节点直接捕获或作为可信证据保留。
-- `S`：事件没有成为最终代表 H3 节点，通常表示被邻近代表节点吸收、压制或未匹配。
-- `D`：原始阶段已有明确异常或硬剔除标记。
-
-这些状态用于解释 demo 可视化，不等同于全量生产环境内部所有私有审计字段。
-
-## 仓库结构
-
-```text
-.
-|-- assets/figures/
-|   |-- full_od_strategy_framework_public_zh.png
-|   |-- full_od_strategy_framework_public_en.png
-|   `-- demo_preview.png
-|-- demo/
-|   |-- index.html
-|   |-- shanghai-validation/
-|   `-- data/
-|       |-- manifest.json
-|       |-- processed/
-|       `-- raw/
-`-- scripts/
-    |-- build_open_demo_data.py
-    |-- prepare_shanghai_unified_sample.py
-    `-- build_shanghai_open_demo_data.py
-```
-
-## 重新生成公开 Demo 数据
-
-```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\build_open_demo_data.py" `
-  --out ".\demo\data" `
-  --per-city 1000
-```
-
-## 重新生成上海抽样回放数据
-
-第一步，将上海 `residence_*` 抽样改写为原始 pipeline 的 `unified_points` 输入：
-
-```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\prepare_shanghai_unified_sample.py" `
-  --out-root "S:\GEO BIG data\Shanghai-2026\sample_unified_points" `
-  --threads 24 `
-  --batch-size 50000 `
-  --batches-per-read 4 `
-  --overwrite
-```
-
-第二步，在本地 `mobility-fusion` 完整代码仓库中运行原始生产 pipeline，`--spatial-filter-scope none` 用于避免沿用广佛空间过滤：
-
-```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" "pipeline\run_production_pipeline.py" `
-  --raw-root "S:\GEO BIG data\Shanghai-2026\sample_unified_points" `
-  --raw-format unified_points `
-  --out-root "S:\GEO BIG data\Shanghai-2026\sample_mobility_fusion_v0_4_0" `
-  --date 2026-05-01 --date 2026-05-02 --date 2026-05-03 --date 2026-05-04 `
-  --date 2026-05-05 --date 2026-05-06 --date 2026-05-07 --date 2026-05-08 `
-  --date 2026-05-09 --date 2026-05-10 --date 2026-05-11 --date 2026-05-12 `
-  --date 2026-05-13 --date 2026-05-14 `
-  --canonical-h3-res 10 `
-  --parent-h3-res 9 `
-  --range-shard-target-rows 500000 `
-  --od-range-target-rows 200000 `
-  --ingest-polars-threads 4 `
-  --od-step-workers 12 `
-  --od-polars-threads 1 `
-  --od-start-stagger-sec 1 `
-  --core-output-only `
-  --no-analysis-tables `
-  --spatial-filter-scope none `
-  --force
-```
-
-第三步，将原始 pipeline 输出转换为公开 demo 的同一套数据分片：
-
-```powershell
-& "E:\ANACONDA\envs\GEO\python.exe" ".\scripts\build_shanghai_open_demo_data.py"
-```
+`demo/data/manifest_v8.json`与`demo/shanghai-validation/data/manifest_v8.json`为当前入口。旧演示数据已从当前树替换，原版本保留Git历史。旧脚本仅供历史方法参考；当前导出脚本为`scripts/build_v8_public_demo.py`，需本地私有已验收输入与身份映射环境，不包含全量数据或生产私有配置。

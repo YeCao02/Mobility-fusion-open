@@ -1,0 +1,312 @@
+{
+  "status": "passed",
+  "at": "2026-10-28T11:22:57+08:00",
+  "results": [
+    {
+      "cohort": "gba_2024",
+      "original_unique_users": 18000,
+      "public_unique_users": 18000,
+      "city_unique_users": {
+        "gz": 2000,
+        "sz": 2000,
+        "zh": 2000,
+        "fs": 2000,
+        "jm": 2000,
+        "zq": 2000,
+        "hz": 2000,
+        "dg": 2000,
+        "zs": 2000
+      },
+      "available_dates": [
+        "2024-12-24",
+        "2024-12-29"
+      ],
+      "sample_date_slots": 36000,
+      "raw_only_sample_dates": 87,
+      "empty_sample_dates": 5846,
+      "nodes_without_raw_sample_dates": 0,
+      "context_row_totals": {
+        "nodes": 213433,
+        "segments": 183366,
+        "raw": 2250737
+      },
+      "unknown_administrative_city_nodes": 0,
+      "unknown_cross_city_segments": 0,
+      "unknown_city_and_cross_preserved_as_null": true,
+      "per_identity_date_counts_exact": true,
+      "all_segment_endpoints_reference_nodes": true,
+      "original_uuid_format_coverage": 18000,
+      "private_uuid_patterns_found": 0,
+      "private_uuid_scan_basis": "All selected source UUIDs have32hex/36UUID format; every decompressed public data shard scanned for either format; public IDs20hex+city prefix",
+      "source_build_id": "7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49",
+      "manifest_sha256": "42892f85217daa2ac05fc6954c80e6ab893eb8428ad8b0fbad3d0736123bbd70",
+      "export_script_sha256": "72fad17d7b95d774047ddd4d750bc6f2fe39b7c2938dd9b8ee685569751321e9",
+      "input_source_kind": "accepted published package plus original standardized sorted analysis-day view; SH read-only recycled source mapping",
+      "input_plan_sha256": null,
+      "input_plan_note": "Original full plan not needed for GBA extraction; CURRENT+COMPLETE+all selected payloads verified, raw selected source SHA matches accepted request",
+      "source_checks": [
+        {
+          "source_sha256": "46b6d88bd9078dbe703457acf96f3e57bbae8da740f5a5999ff1f95c95a8f690",
+          "bytes": 247954793,
+          "date": "2024-12-24",
+          "verification": "selected source full SHA256 readback"
+        },
+        {
+          "source_sha256": "0930e5af4b131796aa3be3a0acd036b2b2b62d8fa6cda884a0ff01480e1a376c",
+          "bytes": 255144397,
+          "date": "2024-12-29",
+          "verification": "selected source full SHA256 readback"
+        }
+      ],
+      "gzip_files": 360,
+      "gzip_bytes": 50566507,
+      "max_gzip_file_bytes": 224687,
+      "wall_sec": 9.2733314037323
+    },
+    {
+      "cohort": "shanghai_residence_2026",
+      "original_unique_users": 2000,
+      "public_unique_users": 2000,
+      "city_unique_users": {
+        "sh": 2000
+      },
+      "available_dates": [
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-03",
+        "2026-05-04",
+        "2026-05-05",
+        "2026-05-06",
+        "2026-05-07",
+        "2026-05-08",
+        "2026-05-09",
+        "2026-05-10",
+        "2026-05-11",
+        "2026-05-12",
+        "2026-05-13",
+        "2026-05-14"
+      ],
+      "sample_date_slots": 28000,
+      "raw_only_sample_dates": 0,
+      "empty_sample_dates": 4508,
+      "nodes_without_raw_sample_dates": 0,
+      "context_row_totals": {
+        "nodes": 201335,
+        "segments": 177843,
+        "raw": 2313740
+      },
+      "unknown_administrative_city_nodes": 201335,
+      "unknown_cross_city_segments": 177843,
+      "unknown_city_and_cross_preserved_as_null": true,
+      "per_identity_date_counts_exact": true,
+      "all_segment_endpoints_reference_nodes": true,
+      "original_uuid_format_coverage": 2000,
+      "private_uuid_patterns_found": 0,
+      "private_uuid_scan_basis": "All selected source UUIDs have32hex/36UUID format; every decompressed public data shard scanned for either format; public IDs20hex+city prefix",
+      "source_build_id": "795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f",
+      "manifest_sha256": "8fe18f032db3fd3e30b21e3e4f240ab8c7fc3b1beb897b37c4964a7a167497e0",
+      "export_script_sha256": "72fad17d7b95d774047ddd4d750bc6f2fe39b7c2938dd9b8ee685569751321e9",
+      "input_source_kind": "accepted published package plus original standardized sorted analysis-day view; SH read-only recycled source mapping",
+      "input_plan_sha256": "d0dd441ee619d8dcff80027a6923905673ea0298dcd882fa6a62a2d04a8d25a1",
+      "input_plan_note": "Original581-source plan unchanged; selected raw binding dates/SHA/size/mtime match, recycle preserves files",
+      "source_checks": [
+        {
+          "date": "2026-05-01",
+          "source_sha256": "97984e9233e3769a5784455b34412088d739ab12bbee7bb65fc993cf4b793f40",
+          "bytes": 5160818592,
+          "mtime_ns": 1793023572319742600
+        },
+        {
+          "date": "2026-05-02",
+          "source_sha256": "12214be96469822164384fd67d418a2de661d4292593411f1550c0e5bb8edab5",
+          "bytes": 5150870162,
+          "mtime_ns": 1793023968487663000
+        },
+        {
+          "date": "2026-05-03",
+          "source_sha256": "9077b6386d5b3fb779c2bbd42db296cbae994c1e5afb7e8e2373fb439c8eb1f7",
+          "bytes": 5080355447,
+          "mtime_ns": 1793024322405730500
+        },
+        {
+          "date": "2026-05-04",
+          "source_sha256": "c08f11d9ed5b09cf8abce6693d464e2cc519e6f54444b320bd1451adec42f56d",
+          "bytes": 5362259929,
+          "mtime_ns": 1793025703811081000
+        },
+        {
+          "date": "2026-05-05",
+          "source_sha256": "2e52d9813514a94283cfab5690a14e0749dee576424f11ac4b14aad1b55ea50d",
+          "bytes": 5741110854,
+          "mtime_ns": 1793025755852761300
+        },
+        {
+          "date": "2026-05-06",
+          "source_sha256": "e0af3004e4c8ccf7e626246cfaf6690017befa203553b42bacece3d758fefe1c",
+          "bytes": 1174794,
+          "mtime_ns": 1793036246690453700
+        },
+        {
+          "date": "2026-05-06",
+          "source_sha256": "9bf1cb78e3e278740cfa9f87437a3c74ad229cfe6c1499d709339364a5b222c8",
+          "bytes": 1119825,
+          "mtime_ns": 1793036246688449100
+        },
+        {
+          "date": "2026-05-06",
+          "source_sha256": "67f021e332da7e92361b06c2dbff63ed173a87c706678fa50ac475c2a99f7dbb",
+          "bytes": 1216892,
+          "mtime_ns": 1793036246690959200
+        },
+        {
+          "date": "2026-05-07",
+          "source_sha256": "5b816bd005c8b938c8366f5846ed0bfd7cb54d4b9d9727c46529d3d3e1e03e86",
+          "bytes": 1168970,
+          "mtime_ns": 1793036750068273600
+        },
+        {
+          "date": "2026-05-07",
+          "source_sha256": "bc9c1cd76d992305168424debade0f7b3da19844c6382f385703d5340c62e767",
+          "bytes": 1148254,
+          "mtime_ns": 1793036749888765400
+        },
+        {
+          "date": "2026-05-07",
+          "source_sha256": "a00b49655993542a1ef904fc715e97a4368b17e6a5ddf4f3a6dfa122a9ac765f",
+          "bytes": 1624843,
+          "mtime_ns": 1793036749893768000
+        },
+        {
+          "date": "2026-05-08",
+          "source_sha256": "46777c50ed10e4782f2164c9845b6527e7f5b39fad5520d46cb23639eb5603e0",
+          "bytes": 1153516,
+          "mtime_ns": 1793037320839619500
+        },
+        {
+          "date": "2026-05-08",
+          "source_sha256": "fe5dd25663921f17e74e1a9d6496a33f454b8451f69b040e9e69c28421bfebf1",
+          "bytes": 1177347,
+          "mtime_ns": 1793037320839619500
+        },
+        {
+          "date": "2026-05-08",
+          "source_sha256": "04ee06d08383ed9475943c5bc313a894b9291d5d969521d5ebba7054cb1f8f1e",
+          "bytes": 2227944,
+          "mtime_ns": 1793037320851619200
+        },
+        {
+          "date": "2026-05-09",
+          "source_sha256": "58e8d10b8359ca14c2e19794c4cd36ee1e856fb1f63448dd75bb2fba033c47c8",
+          "bytes": 1195113,
+          "mtime_ns": 1793037924037998100
+        },
+        {
+          "date": "2026-05-09",
+          "source_sha256": "a9f41aaa40054eaf2fc4378ea5d7f5957e36f04b0fce1e3486d1f571f5d29f19",
+          "bytes": 1124592,
+          "mtime_ns": 1793037924035995100
+        },
+        {
+          "date": "2026-05-09",
+          "source_sha256": "8816beea991ab3b387c3cf2678f2dff8f9bd478c0f1e8b713d38062f982b6efc",
+          "bytes": 2729170,
+          "mtime_ns": 1793037924070506700
+        },
+        {
+          "date": "2026-05-10",
+          "source_sha256": "a0e09e468efbe24271879ed971f744849b6ca9e368c9bc7f1e8dfd9dcae4abdd",
+          "bytes": 1131861,
+          "mtime_ns": 1793038526289929000
+        },
+        {
+          "date": "2026-05-10",
+          "source_sha256": "b8abb9b3422d2057667a8d36f303aca46b0950e3bb242228e81dbfc4c8ad7e34",
+          "bytes": 1138151,
+          "mtime_ns": 1793038526290928600
+        },
+        {
+          "date": "2026-05-10",
+          "source_sha256": "7d617df4415fda43bef304e5121970ae1b40191a6c9178607da366f067059e20",
+          "bytes": 3526513,
+          "mtime_ns": 1793038526345434700
+        },
+        {
+          "date": "2026-05-11",
+          "source_sha256": "088ba0a6e7d8bf97d7cc861619d96e8224ddec45c74674ea6caa3b2124683235",
+          "bytes": 1181940,
+          "mtime_ns": 1793039151060571800
+        },
+        {
+          "date": "2026-05-11",
+          "source_sha256": "689696f61fa4a6efd4b9cf31dd3c3af60c307dea97aa39165f136da7e8ce90f5",
+          "bytes": 1104569,
+          "mtime_ns": 1793039151031573900
+        },
+        {
+          "date": "2026-05-11",
+          "source_sha256": "3eabd3f1d8234e0e4bb1860a15d221b8701d00845ae8c17148ff3fe831bce762",
+          "bytes": 2667112,
+          "mtime_ns": 1793039151082575500
+        },
+        {
+          "date": "2026-05-12",
+          "source_sha256": "ba1fb4d61f95463ee8382dd1dde03b6e6a7247daf7dcd04e068cfc6a2b18e9d2",
+          "bytes": 1167852,
+          "mtime_ns": 1793039829147741100
+        },
+        {
+          "date": "2026-05-12",
+          "source_sha256": "21d7cc26daa6f43aaba0c3655fb2dad452dabd1c75d009d93daa10cdc1e26545",
+          "bytes": 1110155,
+          "mtime_ns": 1793039829114111100
+        },
+        {
+          "date": "2026-05-12",
+          "source_sha256": "971d7db8a1a152bce0b3ae5c46eda9143584563fdbd44a4f3337d4a2fe93a923",
+          "bytes": 2736871,
+          "mtime_ns": 1793039829176335400
+        },
+        {
+          "date": "2026-05-13",
+          "source_sha256": "f9775feee92d90ed8c7b204eaeda30c5e0ec4b2cd2802148a6a95d9239020236",
+          "bytes": 1218138,
+          "mtime_ns": 1793040508031939900
+        },
+        {
+          "date": "2026-05-13",
+          "source_sha256": "85bfc8b0cb570c3c228307d2928e2db833499f5244be66090664af7577844dfa",
+          "bytes": 1157175,
+          "mtime_ns": 1793040508057942900
+        },
+        {
+          "date": "2026-05-13",
+          "source_sha256": "2a87b4b74eb411fee1dce3dd6f9f10b552af267dbc4cc6a2ce5c80785ce2ef77",
+          "bytes": 4282074,
+          "mtime_ns": 1793040508150608200
+        },
+        {
+          "date": "2026-05-14",
+          "source_sha256": "c775f5ac531b449b8e4974c9c4c3bcde180aae4cb15494188f702a13b7161232",
+          "bytes": 1146283,
+          "mtime_ns": 1793041255724340700
+        },
+        {
+          "date": "2026-05-14",
+          "source_sha256": "09ca33964c3a126b91dd3861d4ea6f37bc8c9cb66f621f7ad0dbb826c3975579",
+          "bytes": 1108473,
+          "mtime_ns": 1793041255713342800
+        },
+        {
+          "date": "2026-05-14",
+          "source_sha256": "401e7d7c15b758cd93fcdaa7a4df00f8b34f915579b045189106fb04d67172ae",
+          "bytes": 3600079,
+          "mtime_ns": 1793041255789438200
+        }
+      ],
+      "gzip_files": 280,
+      "gzip_bytes": 47946828,
+      "max_gzip_file_bytes": 247434,
+      "wall_sec": 9.459657669067383
+    }
+  ]
+}

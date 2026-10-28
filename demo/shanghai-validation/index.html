@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mobility Fusion Open Demo</title>
+  <title>Frozen-v8 Mobility Fusion · 2,000 users per city</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
@@ -85,11 +85,14 @@
 <body>
   <aside id="sidebar">
     <div id="head">
-      <h1>Mobility Fusion Open Demo</h1>
+      <h1>Frozen-v8 Mobility Demo</h1>
       <div id="stats">loading...</div>
-      <label class="field-label" for="city">City sample / 样本城市</label>
+      <label class="field-label" for="city">Cohort / 样本归属城市</label>
       <select id="city" onchange="loadCity(this.value)"></select>
-      <input id="search" placeholder="Search UUID..." oninput="renderList(this.value)" />
+      <label class="field-label" for="date">Available date / 可用日期</label><select id="date" onchange="loadDate(this.value)"></select>
+      <label class="field-label" for="page">Sample page / 样本分页</label><select id="page" onchange="loadPage()"></select>
+      <div style="font-size:11px;line-height:1.5;color:#b7c8df;margin:8px 0">Frozen-v8 · 每城市固定2,000名样本用户，保留已交付日期内完整可用上下文。方便抽样，不代表人口总体；跨日ID为本次独立伪名。<br>raw标记是H3/时间匹配展示代理，不是原始私有审计判定。坐标与时间仅用于方法演示。节点城市按已有大湾区H3表判定，表外为未知；样本归属不等于实际居住或每个节点的城市。</div>
+      <input id="search" placeholder="Search sample ID..." oninput="renderList(this.value)" />
     </div>
     <div id="uuid-list"></div>
   </aside>
@@ -104,7 +107,7 @@
       </div>
       <div id="toolbar">
         <button id="rawToggle" class="btn active" onclick="toggleRaw()">Raw points</button>
-        <button id="dropToggle" class="btn active" onclick="toggleDrop()">Drop/Suppress</button>
+        <button id="dropToggle" class="btn active" onclick="toggleDrop()">Unmatched/Flagged</button>
         <button class="btn" onclick="toggleLegend()">Legend</button>
       </div>
       <div id="legend" class="show">
@@ -120,15 +123,16 @@
         <div class="legend-row"><span class="tri"></span>WiFiConnect</div>
         <div class="legend-row"><span class="shape raw-W"></span>WiFiStable</div>
         <div class="legend-row"><span class="shape raw-S dia"></span>SceneReco</div>
-        <div class="legend-row"><span class="shape raw-drop"></span>explicit drop / suppressed / 明确剔除或压制</div>
+        <div class="legend-row"><span class="shape raw-drop"></span>unmatched display proxy / input quality flag · 未匹配展示代理 / 输入标记</div>
       </div>
     </div>
     <div id="timeline"></div>
-    <div id="panel"><h2>Select a UUID</h2></div>
+    <div id="panel"><h2>Select a sample</h2></div>
   </main>
   <script>
     const map = L.map("map", {preferCanvas: true}).setView([23.15, 113.35], 9);
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {attribution: "&copy; OpenStreetMap &copy; CARTO", maxZoom: 20}).addTo(map);
+    const baseTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxNativeZoom: 19, maxZoom: 20}).addTo(map);
+    L.control.layers({"OpenStreetMap (no API key)": baseTiles}, null, {position:"bottomright"}).addTo(map);
     let manifest = null;
     let DATA = {stats:{}, uuid_summary:[], uuid_data:{}, hex:{}};
     let currentCity = "";
@@ -153,8 +157,13 @@
       document.getElementById("loading").classList.toggle("show", !!active);
     }
     async function getJSON(url) {
-      const resp = await fetch(`${url}?v=${Date.now()}`, {cache:"no-store"});
+      const resp = await fetch(url);
       if (!resp.ok) throw new Error(`${url}: ${resp.status}`);
+      if (url.endsWith(".gz")) {
+        if (!window.DecompressionStream) throw new Error("Gzip replay needs a current Chrome, Edge, Firefox or Safari browser.");
+        const stream = resp.body.pipeThrough(new DecompressionStream("gzip"));
+        return JSON.parse(await new Response(stream).text());
+      }
       return await resp.json();
     }
     function mergeProcessedRaw(processed, raw) {
@@ -182,7 +191,7 @@
     }
     async function init() {
       showLoading("Loading manifest...");
-      manifest = await getJSON("data/manifest.json");
+      manifest = await getJSON("data/manifest_v8.json");
       const citySelect = document.getElementById("city");
       for (const [abbr, meta] of Object.entries(manifest.cities || {})) {
         const opt = document.createElement("option");
@@ -193,21 +202,39 @@
       currentCity = citySelect.value || Object.keys(manifest.cities)[0];
       await loadCity(currentCity);
     }
+    let currentDate = "";
+    let loadToken = 0;
     async function loadCity(city) {
-      stopPlay();
       currentCity = city;
-      showLoading(`Loading ${city.toUpperCase()} demo shards...`);
-      const files = manifest.cities[city].files || [];
-      const payloads = [];
-      for (const f of files) {
-        const [processed, raw] = await Promise.all([getJSON(f.processed), getJSON(f.raw)]);
-        payloads.push(mergeProcessedRaw(processed, raw));
-      }
-      DATA = concatPayloads(payloads);
-      document.getElementById("stats").textContent = `${city.toUpperCase()} | ${DATA.stats.uuid_count} UUID-day | ${DATA.stats.node_count} nodes | ${DATA.stats.od_count} OD | raw matched by shards`;
-      showLoading("", false);
-      renderList();
-      if (DATA.uuid_summary.length) selectUUID(DATA.uuid_summary[0].uuid);
+      const dateSelect = document.getElementById("date");
+      const dates = [...new Set((manifest.cities[city].files || []).map(f => f.date))].sort();
+      dateSelect.replaceChildren(...dates.map(date => { const o=document.createElement("option"); o.value=date; o.textContent=date; return o; }));
+      await loadDate(dates[0]);
+    }
+    async function loadDate(date) {
+      currentDate = date;
+      const files = (manifest.cities[currentCity].files || []).filter(f => f.date === date).sort((a,b)=>a.page-b.page);
+      const pageSelect = document.getElementById("page");
+      pageSelect.replaceChildren(...files.map(f=>{const o=document.createElement("option");o.value=f.page;o.textContent=`Page ${f.page} · ${f.uuid_count} sample-day slots`;return o;}));
+      await loadPage();
+    }
+    async function loadPage() {
+      const token = ++loadToken;
+      stopPlay();clearMap();
+      const page=Number(document.getElementById("page").value);
+      const city=currentCity,date=currentDate;
+      const f=(manifest.cities[city].files||[]).find(f=>f.date===date&&f.page===page);
+      if(!f)return;
+      showLoading(`Loading ${city.toUpperCase()} · ${date} · page ${page}...`);
+      try {
+        const [processed, raw] = await Promise.all([getJSON(f.processed),getJSON(f.raw)]);
+        if(token!==loadToken)return;
+        DATA=mergeProcessedRaw(processed,raw);
+        document.getElementById("search").value="";
+        document.getElementById("stats").textContent=`${city.toUpperCase()} · ${manifest.cities[city].unique_users.toLocaleString()} unique users · ${date} · page ${page} · ${DATA.stats.uuid_count} sample-day slots`;
+        showLoading("",false);renderList();
+        if(DATA.uuid_summary.length)selectUUID(DATA.uuid_summary[0].uuid);
+      } catch(err) { if(token===loadToken)showLoading(`Failed: ${err.message}`,true); console.error(err); }
     }
     function renderList(query="") {
       const q = String(query || "").toLowerCase();
@@ -221,7 +248,7 @@
           <span class="badge">${item.nodes || 0}N ${item.od || 0}OD</span>
           <span class="badge stay">${item.st || 0} stay</span>
           <span class="badge stop">${item.sp || 0} stop</span>
-          ${(item.cross||0) ? `<span class="badge cross">${item.cross} cross</span>` : ""}
+          ${(item.cross||0) ? `<span class="badge cross">${item.cross} cross</span>` : ""}${item.cross_unknown ? `<span class="badge">${item.cross_unknown} city unknown</span>` : ""}
           ${(item.hs||0) ? `<span class="badge hs">${item.hs} hs</span>` : ""}`;
         list.appendChild(div);
       }
@@ -270,7 +297,7 @@
       renderRaw(d);
       renderTimeline(d);
       renderPanel(uuid, d);
-      const all = [...(d.nodes || []).map(n => [n.lat,n.lon])];
+      const all = (d.nodes || []).length ? d.nodes.map(n=>[n.lat,n.lon]) : (d.events || []).map(e=>[e[1],e[0]]);
       if (all.length) map.fitBounds(all, {padding:[70,70], maxZoom: 15});
     }
     function groupNodesByH3(nodes) {
@@ -297,10 +324,10 @@
       return group.map(nodeTip).join("<hr style='border:0;border-top:1px solid #999;margin:5px 0'>");
     }
     function nodeTip(n) {
-      return `<b>#${n.o} ${n.r}</b><br>${n.t0}-${n.t1}<br>${n.dur}s, ${n.ec} events<br>${n.city || ""}<br>${n.h3}<br>${n.pn || ""}`;
+      return `<b>#${n.o} ${n.r}</b><br>${n.t0}-${n.t1}<br>${n.dur}s, ${n.ec} events<br>${n.city || "未知"}<br>${n.h3}<br>${n.pn || ""}`;
     }
     function odTip(o) {
-      return `<b>OD ${o.on}->${o.dn}</b><br>${o.dt}-${o.at}<br>${o.tt ?? "-"}s, ${o.dm ?? "-"}m<br>${o.spd ?? "-"} km/h`;
+      return `<b>OD ${o.on}->${o.dn}</b><br>${o.dt}-${o.at}<br>${o.tt ?? "-"}s, ${o.dm ?? "-"}m<br>${o.spd ?? "-"} km/h<br>Administrative crossing: ${o.cross === null ? "UNKNOWN / 待判" : o.cross ? "YES" : "NO"}`;
     }
     function renderRaw(d) {
       layers.raw.clearLayers();
@@ -364,11 +391,11 @@
         .openOn(map);
     }
     function renderPanel(uuid, d) {
-      const nodes = (d.nodes || []).map(n => `<tr class="click-row" onclick="focusNode(${n.o})"><td>${n.o}</td><td class="role-${n.r}">${n.r}</td><td>${n.h3}</td><td>${n.city||""}</td><td>${n.t0}</td><td>${n.t1}</td><td>${n.dur}</td><td>${n.ec}</td><td>${n.pn||"-"}</td></tr>`).join("");
-      const od = (d.od || []).map(o => `<tr class="click-row" onclick="focusOD(${o.so})"><td>${o.so}</td><td>${o.on}->${o.dn}</td><td>${o.dt}</td><td>${o.at}</td><td>${o.tt??"-"}</td><td>${o.dm??"-"}</td><td class="${(o.spd||0)>170?"speed-high":"speed-ok"}">${o.spd??"-"}</td><td>${o.cross?"YES":"-"}</td></tr>`).join("");
+      const nodes = (d.nodes || []).map(n => `<tr class="click-row" onclick="focusNode(${n.o})"><td>${n.o}</td><td class="role-${n.r}">${n.r}</td><td>${n.h3}</td><td>${n.city||"未知"}</td><td>${n.t0}</td><td>${n.t1}</td><td>${n.dur}</td><td>${n.ec}</td><td>${n.pn||"-"}</td></tr>`).join("");
+      const od = (d.od || []).map(o => `<tr class="click-row" onclick="focusOD(${o.so})"><td>${o.so}</td><td>${o.on}->${o.dn}</td><td>${o.dt}</td><td>${o.at}</td><td>${o.tt??"-"}</td><td>${o.dm??"-"}</td><td class="${(o.spd||0)>170?"speed-high":"speed-ok"}">${o.spd??"-"}</td><td>${o.cross === null ? "UNKNOWN / 待判" : o.cross ? "YES" : "NO"}</td></tr>`).join("");
       const es = d.event_summary || {};
       document.getElementById("panel").innerHTML = `<h2>${uuid.slice(0,18)}... | ${d.nodes?.length||0} nodes, ${d.od?.length||0} OD</h2>
-        <div style="margin-bottom:8px;color:#9fb3d9">Events: raw ${es.raw_total ?? es.total ?? 0}, kept ${es.kept ?? 0}, suppressed ${es.anchor_suppressed ?? 0}, dropped ${es.dropped ?? 0} | STAY ${es.stays ?? 0}, STOP ${es.stops ?? 0}</div>
+        <div style="margin-bottom:8px;color:#9fb3d9">Raw events ${es.raw_total ?? es.total ?? 0}; H3/time match proxy: matched ${es.kept ?? 0}, unmatched ${es.anchor_suppressed ?? 0}, explicit flag ${es.dropped ?? 0} | STAY ${es.stays ?? 0}, STOP ${es.stops ?? 0}</div>
         <table><thead><tr><th>#</th><th>Role</th><th>H3</th><th>City</th><th>Start</th><th>End</th><th>Dur(s)</th><th>Events</th><th>SceneReco</th></tr></thead><tbody>${nodes}</tbody></table>
         <h2 style="margin-top:12px">OD Segments</h2>
         <table><thead><tr><th>#</th><th>O-D</th><th>Depart</th><th>Arrive</th><th>Time(s)</th><th>Dist(m)</th><th>Speed</th><th>Cross</th></tr></thead><tbody>${od}</tbody></table>`;

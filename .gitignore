@@ -5,3 +5,9 @@ demo/data_smoke/
 demo/data_debug/
 demo/*debug*.log
 
+
+# Private linkage and extraction work must stay outside the public repository.
+*PRIVATE*
+*_private/
+PUBLIC_ID_SALT*
+*.binding.json

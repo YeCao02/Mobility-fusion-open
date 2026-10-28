@@ -1,0 +1,304 @@
+{
+  "generated_at": "2026-10-28T11:34:41.631934+08:00",
+  "status": "final_local_evidence_assembled_remote_publication_separate_receipt_pending",
+  "report_scope": "2026-10-22 source conversation through2026-10-28 accepted two-region production, storage move/recycle and local public-demo validation",
+  "historical_sources": [
+    {
+      "id": "S01",
+      "evidence_date": "2026-10-22",
+      "repository_relative_path": "research/takeover_abc_v8/REPORT.md",
+      "bytes": 12999,
+      "sha256": "595cbb4a74f8cec78700e367a7f21a534f878b837558ec0f47efa6cdea4bb4b7",
+      "supports": "旧核心与冻结v8的固定50万A/B/C初次复核，速度/体积未达目标",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S02",
+      "evidence_date": "2026-10-21",
+      "repository_relative_path": "research/final_acceptance_v8/REPORT.md",
+      "bytes": 14862,
+      "sha256": "06f03651f572c57962b791b9a79fdf0b1f5c491a03fb866f4fceb575d5c1afc6",
+      "supports": "冻结v8独立10万用户验收与存储/计算结构试验",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S03",
+      "evidence_date": "2026-10-23",
+      "repository_relative_path": "research/cpu_finish_v8/REPORT.md",
+      "bytes": 8696,
+      "sha256": "9bb8868ae117005ce3eb07227dc20edf8be0f84f4f7ee1df536256ce4ea4624f",
+      "supports": "精确编码、Arrow读器、空闲池准入与同资源上限复核",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S04",
+      "evidence_date": "2026-10-23",
+      "repository_relative_path": "research/cpu_native_v8/REPORT.md",
+      "bytes": 7911,
+      "sha256": "c6495c342797dd0e5a8ba30460d097eaebe895761bd441db24a5fed676fa34cd",
+      "supports": "12个原生构链热点与原生编码/GC负筛选",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S05",
+      "evidence_date": "2026-10-24",
+      "repository_relative_path": "research/cpu_jdrive_v8/evidence/REPORT_R2.md",
+      "bytes": 2828,
+      "sha256": "011579b893e8bd06064a617537d686e167e0c0880994a12c8b5d7fcbff90f57d",
+      "supports": "J盘固定50万逆序旧新完整性能与不采纳批量成员候选",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S06",
+      "evidence_date": "2026-10-24",
+      "repository_relative_path": "research/external_audit_v8_20261024/REPORT.md",
+      "bytes": 5598,
+      "sha256": "17c75804957f51291f6fa1cf437927db203ff15309764f33018145eff250851f",
+      "supports": "A/B/C外部审计与生产接入缺口",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S07",
+      "evidence_date": "2026-10-24",
+      "repository_relative_path": "research/production_integration_v8_20261024/REPORT.md",
+      "bytes": 6806,
+      "sha256": "61b8f9ae08513189238ce6d622a4d086562061fe4c38850b18d974f1fe9a5e99",
+      "supports": "独立生产入口、原子发布、故障恢复、完整包合同",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S08",
+      "evidence_date": "2026-10-25",
+      "repository_relative_path": "research/production_integration_v8_20261024/FULL_COMPLETION_REPORT.md",
+      "bytes": 3638,
+      "sha256": "3ea6a6a18e0b38cb9a06b8034ba97453694b67113f27134de231a697f093378e",
+      "supports": "GBA全量验收、实际包体积、失败及成功成本",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S09",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_sort_parallel_r6_20261027/REPORT.md",
+      "bytes": 3952,
+      "sha256": "fb1f23cd2e176770a5a27e6b0826cb01dcedb6779bffadcbbb36aee9db1bc984",
+      "supports": "UUID不交叠范围排序与合成逐行等价；报告是当时候选快照",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S10",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_parallel_verification_r13_20261027/REPORT.md",
+      "bytes": 2322,
+      "sha256": "4255f0abd19fe37a8e618f443f09218a00b609e04210eaf1d516f715ac50e30b",
+      "supports": "4路输入哈希、8路提交校验、采用和提前规划",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S11",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_source_restore_r18_20261027/REPORT.md",
+      "bytes": 2514,
+      "sha256": "c09a1c07340655c87784d72885c330d160c84f701c203c8e6150c4d1a52352bd",
+      "supports": "R17主代理Git依赖移除事故与266源码SHA恢复",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S12",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_actual_watermark_r19_20261027/REPORT.md",
+      "bytes": 3771,
+      "sha256": "6946a0cc81d04ca37493ca267e3fcea20c81fe8866757e1ffb47f93e343e0dc9",
+      "supports": "真实提交额度/物理水位准入与两次预OOM保护负结果",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S13",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_reboot_resume_r24_20261027/REPORT.md",
+      "bytes": 3389,
+      "sha256": "0195a8a19dc16de0669a612b4e104a72b7d03c6a5247ed2c05cd7206ce1789d8",
+      "supports": "重启后源与COMMIT核验、R22/R23恢复配置错误",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S14",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "research/shanghai_execution_capacity24_r25_20261028/FINAL_ACCEPTANCE_PUBLIC.json",
+      "bytes": 3482,
+      "sha256": "5f191c7f73311d7ef014bcf8f3b48fb902726db2867d91569aeb4142e699a38b",
+      "supports": "SH两CURRENT、全部COMMIT/catalog/plan和输入行数闭合",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S15",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "research/shanghai_execution_capacity24_r25_20261028/FINAL_COST_LEDGER_PUBLIC.json",
+      "bytes": 107451,
+      "sha256": "23687347a578a0a4e046c4363668237ec4d4a755fbbe85377ac75eb3d882d413",
+      "supports": "21 owner/7 run/11无最终结果及223项成本组件与未知CPU覆盖",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S16",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "research/shanghai_execution_capacity24_r25_20261028/DEPLOYMENT_VERIFIED_PUBLIC.json",
+      "bytes": 2522,
+      "sha256": "a5a3c327fc16d279fdf833f8fec3c1b6b1e2a35afc2a1ddc5e498cb22f6d3799",
+      "supports": "实际24busy和新提交，非登记值推断",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S17",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "research/shanghai_execution_capacity24_r25_20261028/REPORT.md",
+      "bytes": 5346,
+      "sha256": "560b73b0fd1c1a665039661a0f7abc3dc7210453b099c984c4c978821f2eda03",
+      "supports": "24容量sidecar与冻结科学plan隔离；前段历史候选状态须读至后续revision",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S18",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "research/shanghai_execution_capacity24_r25_20261028/FINAL_REPORT.md",
+      "bytes": 3139,
+      "sha256": "a4d58a491ac4135f23dd67d3f1fc6cbb9eedf65050da58e5424969bb318dfbde",
+      "supports": "SH最终完成与本地Git/未远端集成边界",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "S19",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "MOBILITY_ALGORITHM_MEMORY.md",
+      "bytes": 92047,
+      "sha256": "84989ac44a3af596df8be00278d721ec26b889e6fd365f70aaee74e3b2ce0308",
+      "supports": "完整revision链，含科学前史、存储、生产恢复和最新指令",
+      "hash_scope": "historical snapshot at initial evidence compilation; current mutable project records may have appended revisions",
+      "snapshot_at": "2026-10-28T10:47:13.583116+08:00",
+      "not_asserting_current_worktree_hash": true
+    },
+    {
+      "id": "S20",
+      "evidence_date": "2026-10-28",
+      "repository_relative_path": "docs/research/ADOPTION_REGISTER.json",
+      "bytes": 262604,
+      "sha256": "2fb9f8cc9f428c3aa5e679a8101e53bb66d703381c7911520738091ba0ea858f",
+      "supports": "采纳、条件采纳、负结果与未验证项",
+      "hash_scope": "historical snapshot at initial evidence compilation; current mutable project records may have appended revisions",
+      "snapshot_at": "2026-10-28T10:47:13.583116+08:00",
+      "not_asserting_current_worktree_hash": true
+    },
+    {
+      "id": "S21",
+      "evidence_date": "2026-10-27",
+      "repository_relative_path": "research/shanghai_full_standardized_20261026/COMPLETION_REPORT.md",
+      "bytes": 1202,
+      "sha256": "30f6f0d83b991ba6383c0da743f44327e8edc8e7e99ea9c077d99e31532f099e",
+      "supports": "SH标准化输入验收与粗时间/空间政策",
+      "hash_scope": "evidence file snapshot at initial compilation; original reports not retrospectively rewritten"
+    },
+    {
+      "id": "T01",
+      "thread_id": "01a161d1-5e65-7ca0-a779-bf3cae0b4335",
+      "title": "0-数据处理与算法提升-2",
+      "url": "codex://threads/01a161d1-5e65-7ca0-a779-bf3cae0b4335",
+      "created_at": "2026-10-22T12:14:33+08:00",
+      "read_scope": "有限读取旧会话元信息与末段消息，报告技术结论以逐文件绑定证据为主；未宣称通读全部工具历史"
+    }
+  ],
+  "current_public_receipts": [
+    {
+      "id": "E01",
+      "file": "evidence/STORAGE_FINAL_PUBLIC.json",
+      "original_public_receipt_sha256": "4cb5f15b47ea6b7491e7352ae0ee3292daf6b0d989a0c90dd10e56daf7de3224",
+      "published_copy_sha256": "4cb5f15b47ea6b7491e7352ae0ee3292daf6b0d989a0c90dd10e56daf7de3224",
+      "published_bytes": 1345,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E02",
+      "file": "evidence/DATASET_INVENTORY_PUBLIC.json",
+      "original_public_receipt_sha256": "2a3ccc9079dcae82b762af8b2eab4f3573b287c16daa1192c2b15ad5c11fe0b9",
+      "published_copy_sha256": "2a3ccc9079dcae82b762af8b2eab4f3573b287c16daa1192c2b15ad5c11fe0b9",
+      "published_bytes": 5662,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E03",
+      "file": "evidence/MIGRATION_VERIFICATION_PUBLIC.json",
+      "original_public_receipt_sha256": "a8d8e0f833d648d7f64e318a02bf7e5793cf3f35973288a8da8d4aa8430851dc",
+      "published_copy_sha256": "a8d8e0f833d648d7f64e318a02bf7e5793cf3f35973288a8da8d4aa8430851dc",
+      "published_bytes": 910,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E04",
+      "file": "evidence/CLEANUP_RESULT_PUBLIC.json",
+      "original_public_receipt_sha256": "0f5ec9b558045610232f95e9a579edb349f993d6310163e0838e37a99709010e",
+      "published_copy_sha256": "0b719d5e57b58a5d69b3f0130803bcd1c605ba031cb66ee196efac8ccd0d9eb7",
+      "published_bytes": 3646,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E05",
+      "file": "evidence/PUBLIC_DATA_VALIDATION.json",
+      "original_public_receipt_sha256": "d878148e349949e3c6a822f4b4c4d67d2a261cdb37c357c923ac79770eb4dce3",
+      "published_copy_sha256": "ce8db9fc728ddfe54f0203c1d268cbc4010e469dc3f3574a5020011191fadf18",
+      "published_bytes": 11973,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E06",
+      "file": "evidence/ROOT_BROWSER_QA_PUBLIC.json",
+      "original_public_receipt_sha256": "4a2a13491cc9a8b19367fc12c719d50195b50d3775d597937f50ac83f9c8fa04",
+      "published_copy_sha256": "4a2a13491cc9a8b19367fc12c719d50195b50d3775d597937f50ac83f9c8fa04",
+      "published_bytes": 2165,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E07",
+      "file": "evidence/DEMO_INDEPENDENT_REVIEW_PUBLIC.json",
+      "original_public_receipt_sha256": "a5a18e6662631cd5626901125619b0dc7e8002384f098d14c9117e22b2403835",
+      "published_copy_sha256": "a5a18e6662631cd5626901125619b0dc7e8002384f098d14c9117e22b2403835",
+      "published_bytes": 8517,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E08",
+      "file": "evidence/EXCLUSION_MEMBERSHIP_PUBLIC.json",
+      "original_public_receipt_sha256": "207a7aed7c4bb940859889c05e09ee13c183b6c17130ca45f9789e386ef66c6d",
+      "published_copy_sha256": "3d31171dc91a53352b73eb17b8302213d435b00b103576147456531738140a80",
+      "published_bytes": 289,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E09",
+      "file": "evidence/GBA_BROWSER_QA_PUBLIC.json",
+      "original_public_receipt_sha256": "3f65d4e3378948ed1cd0fe60bc72e2e639b64004f43804ce8923eb16ba24d455",
+      "published_copy_sha256": "16c9f82682e95a300a0ff8a8f1220dadd60f1e32b5aaae905c54ca0075dfb6c7",
+      "published_bytes": 1584,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E10",
+      "file": "evidence/BROWSER_ENVIRONMENT_NOTE_PUBLIC.json",
+      "original_public_receipt_sha256": "b0383f215caa5258742445635e2d4e9fcc47caad068d91bcf3fa80085c55878c",
+      "published_copy_sha256": "b0383f215caa5258742445635e2d4e9fcc47caad068d91bcf3fa80085c55878c",
+      "published_bytes": 871,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    },
+    {
+      "id": "E11",
+      "file": "evidence/ANOMALY_EXCLUSION_PUBLIC.json",
+      "original_public_receipt_sha256": "82b03e4fc92bda1c3de290d298c79015e61b8b98822b6ae66b8e5ff95a2cf0c2",
+      "published_copy_sha256": "7bdc10f70edeb5ab8c928e1399657e24127387d7653a727f1c1f7a64f1664e5d",
+      "published_bytes": 939,
+      "redaction_policy": "private identity-list paths/recycle internals omitted; original local evidence retained"
+    }
+  ],
+  "sanitized_fields": [
+    "private_identity_registry"
+  ],
+  "privacy": "No real UUID, coordinate payload, private identity-list file, recycle internal path or user SID included",
+  "remote_implementation_status": "Documentation publication is separate from R25 runtime code integration; R25 code local-only retained",
+  "current_user_exclusion": "One anomalous identity384587flow rows permanently excluded from analysis at direct user instruction; no further observation investigation"
+}

@@ -1,0 +1,10 @@
+# Preserve bytes bound by the frozen-v8 demo validation receipts.
+scripts/build_v8_public_demo.py -text
+demo/index.html -text
+demo/shanghai-validation/index.html -text
+demo/data/manifest_v8.json -text
+demo/shanghai-validation/data/manifest_v8.json -text
+demo/data/v8/*.gz -text
+demo/data/v8_sh/*.gz -text
+docs/demo-refresh-20261028/* -text
+docs/pipeline-20261028/* -text

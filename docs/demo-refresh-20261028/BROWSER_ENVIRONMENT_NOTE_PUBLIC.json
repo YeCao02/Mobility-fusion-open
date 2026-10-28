@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-28T11:24:06+08:00",
+  "gba_edge_software_test": "passed; 24 initial OSM tiles loaded; two dates and page10; initial3 data requests; no page errors",
+  "sh_edge_and_chrome_local_test": "negative environment result: local page assets returned204 empty before reaching normal-permission Python server; same files normal HTTP200; no security/proxy setting changed",
+  "sh_independent_IAB": "Root confirmed actual SH initialMay1, May14/page10,200slots,list200,Play/Pause and10/10OSMtiles; separate root evidence to be attached",
+  "failed_preparation_tests": "Initial restricted local server not reachable from normal browser; restarted normal-permission8766. Early SHstandardized-file-date partial superseded before public export.",
+  "current_preview": "http://127.0.0.1:8766/demo/ and /demo/shanghai-validation/",
+  "live_https_pending": true
+}

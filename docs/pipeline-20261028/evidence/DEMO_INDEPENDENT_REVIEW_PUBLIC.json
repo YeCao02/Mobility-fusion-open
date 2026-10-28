@@ -1,0 +1,178 @@
+{
+  "at": "2026-10-28T11:34:41.631934+08:00",
+  "status": "passed_local_data_static_and_independent_IAB_UI_remote_publication_pending",
+  "reviewer": "pipeline_summary_independent_readonly",
+  "scope": "Read source/manifests and aggregate data/browser receipts, independently compare their exact SHA bindings. No second extraction/construction and no private UUID or coordinate values output.",
+  "current_builder_sha256": "72fad17d7b95d774047ddd4d750bc6f2fe39b7c2938dd9b8ee685569751321e9",
+  "data_validation_sha256": "d878148e349949e3c6a822f4b4c4d67d2a261cdb37c357c923ac79770eb4dce3",
+  "root_browser_qa_sha256": "4a2a13491cc9a8b19367fc12c719d50195b50d3775d597937f50ac83f9c8fa04",
+  "current_html_sha256": {
+    "demo/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be",
+    "demo/shanghai-validation/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be"
+  },
+  "cohorts": [
+    {
+      "cohort": "gba_2024",
+      "original_unique_users": 18000,
+      "public_unique_users": 18000,
+      "original_uuid_format_coverage": 18000,
+      "city_unique_users": {
+        "gz": 2000,
+        "sz": 2000,
+        "zh": 2000,
+        "fs": 2000,
+        "jm": 2000,
+        "zq": 2000,
+        "hz": 2000,
+        "dg": 2000,
+        "zs": 2000
+      },
+      "available_dates": [
+        "2024-12-24",
+        "2024-12-29"
+      ],
+      "sample_date_slots": 36000,
+      "raw_only_sample_dates": 87,
+      "empty_sample_dates": 5846,
+      "nodes_without_raw_sample_dates": 0,
+      "context_row_totals": {
+        "nodes": 213433,
+        "segments": 183366,
+        "raw": 2250737
+      },
+      "unknown_administrative_city_nodes": 0,
+      "unknown_cross_city_segments": 0,
+      "unknown_city_and_cross_preserved_as_null": true,
+      "per_identity_date_counts_exact": true,
+      "all_segment_endpoints_reference_nodes": true,
+      "source_build_id": "7f0f600b9ebef7342dbc2fc8ebc3dc84bfd2e1793a369629320a6bf03c334b49",
+      "input_plan_sha256": null,
+      "manifest_sha256": "42892f85217daa2ac05fc6954c80e6ab893eb8428ad8b0fbad3d0736123bbd70",
+      "gzip_files": 360,
+      "gzip_bytes": 50566507
+    },
+    {
+      "cohort": "shanghai_residence_2026",
+      "original_unique_users": 2000,
+      "public_unique_users": 2000,
+      "original_uuid_format_coverage": 2000,
+      "city_unique_users": {
+        "sh": 2000
+      },
+      "available_dates": [
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-03",
+        "2026-05-04",
+        "2026-05-05",
+        "2026-05-06",
+        "2026-05-07",
+        "2026-05-08",
+        "2026-05-09",
+        "2026-05-10",
+        "2026-05-11",
+        "2026-05-12",
+        "2026-05-13",
+        "2026-05-14"
+      ],
+      "sample_date_slots": 28000,
+      "raw_only_sample_dates": 0,
+      "empty_sample_dates": 4508,
+      "nodes_without_raw_sample_dates": 0,
+      "context_row_totals": {
+        "nodes": 201335,
+        "segments": 177843,
+        "raw": 2313740
+      },
+      "unknown_administrative_city_nodes": 201335,
+      "unknown_cross_city_segments": 177843,
+      "unknown_city_and_cross_preserved_as_null": true,
+      "per_identity_date_counts_exact": true,
+      "all_segment_endpoints_reference_nodes": true,
+      "source_build_id": "795f903d6f71540dcb46d3a404dd78eda44507f72afc541070d7a9221119412f",
+      "input_plan_sha256": "d0dd441ee619d8dcff80027a6923905673ea0298dcd882fa6a62a2d04a8d25a1",
+      "manifest_sha256": "8fe18f032db3fd3e30b21e3e4f240ab8c7fc3b1beb897b37c4964a7a167497e0",
+      "gzip_files": 280,
+      "gzip_bytes": 47946828
+    }
+  ],
+  "all_source_manifest_validation_UI_bindings_match": true,
+  "data_validation_scope": "All640decompressed public shards, every identity-date row counts, endpoint references, global and city unique users, original-id format coverage and no32/36UUID patterns; performed by candidate validator, source and aggregate independently reviewed.",
+  "reviewer_own_source_binding_check": "SH32used sources date/SHA/bytes/mtime all belong to original581-source plan, original half_open expanded view retained via verified read-only recycle mapping; previous standard-file-date partial abandoned.",
+  "local_browser_evidence": {
+    "IAB": {
+      "at": "2026-10-28T11:25:42.253684+08:00",
+      "status": "passed_local_IAB_independent_UI_checks",
+      "browser": "Codex in-app browser (IAB); actual DOM and screenshot, not mocked requests",
+      "html_sha256": {
+        "demo/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be",
+        "demo/shanghai-validation/index.html": "34428d2a4b2a2777fe880c894f4c01d6de88c2862f33a288b36b484f4d5d84be"
+      },
+      "data_validation_sha256": "d878148e349949e3c6a822f4b4c4d67d2a261cdb37c357c923ac79770eb4dce3",
+      "shanghai": {
+        "initial": "SH 2000 unique users; 2026-05-01 page1;200 slots; actual nodes and OD tables",
+        "last_date_page": "2026-05-14 page10;200 list cases",
+        "play_pause_transition": [
+          "Play",
+          "Pause",
+          "Play"
+        ],
+        "raw_toggle_clicked_without_runtime_error": true,
+        "initial_osm_tiles_loaded": 10,
+        "initial_osm_tiles_total": 10,
+        "loading_error": false
+      },
+      "gba": {
+        "city_menu_count": 9,
+        "initial": "GZ 2000 unique users;2024-12-24 page1;200 slots",
+        "changed_city_last_date_page": "ZQ 2000 unique users;2024-12-29 page10;200 list cases",
+        "osm_tiles_loaded": 15,
+        "osm_tiles_total": 15,
+        "loading_error": false,
+        "raw_only_case_verified": {
+          "raw_events": 1,
+          "nodes": 0,
+          "segments": 0,
+          "table_rows": 0
+        },
+        "empty_case_verified": {
+          "raw_events": 0,
+          "nodes": 0,
+          "segments": 0,
+          "table_rows": 0
+        }
+      },
+      "basemap_host": "tile.openstreetmap.org",
+      "visible_attribution": "Leaflet | OpenStreetMap contributors",
+      "API_key_error_observed": false,
+      "screenshots": {
+        "ROOT_SH_IAB_LOCAL.png": "d0cf3cffc3833204862fa79538db158689b88ab277b65df55996f42bed86d908",
+        "ROOT_GBA_IAB_LOCAL.png": "bf4adebae9696e6760e4caa41f7b5178f7b910869a2cc3e4f7f5b594f4e93118"
+      },
+      "environment_limitation": "Chrome/Edge local SH gzip fetch returned empty204 before reaching local server; standard HTTP readback200. IAB same candidate actually succeeds. No security/proxy settings changed; public HTTPS readback remains to be checked after deployment.",
+      "public_https_checked": false
+    },
+    "GBA_Edge_software": "J:\\Mobility-Computing\\phone_spatiotemporal\\work\\Mobility-fusion-open_20261028\\docs\\demo-refresh-20261028\\GBA_BROWSER_QA_PUBLIC.json"
+  },
+  "resolved_findings": [
+    "Global original UUID counts18,000GBA and2,000SH; fixed2,000city users, not2000UUID-day quota.",
+    "Two GBA dates and14SH dates retained per identity; raw-only/empty slots are explicit and totals match selected sources.",
+    "Raw K/S is H3/time visualization proxy, not original algorithm rejection lineage; unsupported fields unknown/null.",
+    "Unknown node city and OD crossing retained null, not filled with cohort city or false.",
+    "Fresh keyed pseudonyms; private mapping and salt outside repository; PN empty; all original-format coverage proven.",
+    "Gzip one-date/200-user page lazy loading; initial3data requests for GBA Edge test, not all city payloads.",
+    "OSM no-key layer and visible attribution; actual IAB tiles SH10/10, GBA15/15; no API-key error."
+  ],
+  "limitations": [
+    "Keyed pseudonyms do not anonymize precise original location/time; no population representativeness or true activity accuracy claim.",
+    "City assignment is earliest available DAY_START H3 city, not residence/dominant city.",
+    "Shanghai sample is residence cohort; flow not mixed in.",
+    "Chrome/Edge local SH204negative environment result retained; IAB actual checks succeeded, not claimed Edge SH pass.",
+    "Local UI pass is not public HTTPS deployment acceptance."
+  ],
+  "remaining_before_final_live_claim": [
+    "After owner publication, read back remote commit/static assets and both GitHub Pages HTTPS endpoints; verify actual live map/data loading or accurately report cache/deployment pending."
+  ],
+  "reviewer_modified_candidate_files": false,
+  "published_by_reviewer": false
+}

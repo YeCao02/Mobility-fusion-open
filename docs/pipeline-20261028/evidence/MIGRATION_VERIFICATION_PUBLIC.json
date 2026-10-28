@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "status": "full_source_and_destination_sha256_and_parquet_footer_verified",
+  "at": "2026-10-28T11:11:16.068825+08:00",
+  "source": "J:\\Mobility-Computing\\mobility_upgrade_20261018\\shanghai_full_standardized_20261026\\data",
+  "destination": "G:\\Mobile_Data_Standardized\\shanghai_full_standardized_20261026\\data",
+  "files": 302,
+  "bytes": 156199065249,
+  "events_rows": 6406319423,
+  "quarantined_rows": 98214,
+  "complete_sha256": "d666b57322514325eeb87f16998ee54c0eb88a2fcc79d47ce0e56a33fe191ba2",
+  "all_source_success_markers_bound": true,
+  "all_destination_parquet_footers_match": true,
+  "wall_sec": 1611.7176495000022,
+  "cpu_sec": 239.71875,
+  "source_payload_recycled": false,
+  "scientific_recomputation": false,
+  "coordinate_conversion_applied": false,
+  "files_manifest_sha256": "9391be312b96bf518e6379ecf93924569704a2554d85bf14dea2dfa930476748"
+}

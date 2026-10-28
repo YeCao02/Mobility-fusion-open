@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "at": "2026-10-28T10:42:24.179510+08:00",
+  "status": "complete_with_user_approved_anomaly_exclusion",
+  "supersedes_disposition": "deferred_single_uuid_pending_human_discussion",
+  "human_decision": "2026-10-28 direct instruction: no further investigation; exclude single anomaly",
+  "excluded_users": 1,
+  "excluded_input_rows": 384587,
+  "excluded_cohort": "flow",
+  "private_identity_registry_sha256": "2c999c9f23690e418f273da8a3f446adc3ecbda54714dec51e927947f3e63cc4",
+  "published_packages_changed": false,
+  "recompute_required": false,
+  "original_data_deleted": false,
+  "further_identity_investigation": false,
+  "accepted_rows": 6888684358,
+  "original_expanded_input_rows": 6889068945,
+  "conservation": "6889068945 input = 6888684358 accepted + 384587 explicitly excluded anomaly rows",
+  "historical_receipts_preserved": true,
+  "historical_deferred_registry_preserved": true
+}
